@@ -1,0 +1,13 @@
+{
+    "guest1" : {
+       "guestName" : "nack",
+       "guestType" : "groom",
+       "guestId": 1
+    },
+    
+    "guest2" : {
+       "guestName" : "bas",
+       "guestType" : "bride",
+       "guestId": 2
+    }
+  }
