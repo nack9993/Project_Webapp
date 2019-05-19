@@ -9,12 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PhotoComponent } from './photo/photo.component';
+import { GuestListComponent } from './guest-list/guest-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BroadcastComponent,
-    PhotoComponent
+    PhotoComponent,
+    GuestListComponent
   ],
   imports: [
     BrowserModule,
