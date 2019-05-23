@@ -1,0 +1,25 @@
+<div class="container" style="width: 30%">
+  <div id="login_div" class="login_area">
+    <div class="panel">
+        <div class="panel-header" style="text-align: center">
+            <h3>Register</h3>
+        </div>
+        <div class="md-form">
+            <input mdbInput [(ngModel)]="email" type="email" class="form-control needs-validation" id="email" required>
+            <label>Email</label>
+            <div class="invalid-feedback">Please input email.</div>
+        <div  class="md-form">
+            <input mdbInput [(ngModel)]="password" type="password" class="form-control" id="password" required>
+            <label>Password</label>
+          </div>
+        <div class="row justify-content-center">
+            <button class="btn " (click)="register()" style="margin-top: 5%; width: 100%;">Register</button>
+        </div>
+      </div>
+        <div class="row justify-content-center" style="margin-top: 10px">
+            Already have an account? &nbsp; <a routerLink="/login" style="color:#ffffff">Login</a>
+        </div>
+    </div>
+  </div>
+</div>
+

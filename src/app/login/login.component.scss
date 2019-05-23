@@ -1,0 +1,67 @@
+
+  .container {
+    margin: auto auto;
+    width: 30%;
+  }
+
+  .login{
+    margin: auto auto;
+    vertical-align: middle;
+  }
+
+  .login_area{
+    margin-top: 130px;
+    color: #020701;
+    position: fixed;
+    margin-left: 4%;
+    display: block;
+    background-color:#fff;
+    padding : 30px;
+    border-radius: 5px;
+  
+  }
+  
+  .login_area button {
+    padding: 10px;
+    width: 375px;
+    background:  rgba(228, 169, 169, 0.918);
+    color: #020701;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .login_area button:hover {
+    background: #020701;
+    color:  rgba(228, 169, 169, 0.918);
+    border: 2px solid  rgba(228, 169, 169, 0.918);
+  }
+
+  .login_area h1{
+    float: left;
+    font-size: 40px;
+    margin-bottom: 50px;
+    padding: 13px 0;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  input{
+    margin-top:5px;
+    border: none;
+    outline: none;
+    background: none;
+    color: #020701;
+    font-size: 15px;
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .login_area button{
+    width: 100%;
+    background: none;
+    color: white;
+    padding: 5px;
+  }
+
+
+  

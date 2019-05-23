@@ -11,7 +11,6 @@ export class GuestListComponent implements OnInit {
   constructor(private guestService: GuestService) { 
   }
 
-
   ngOnInit() {
     this.getGuests();
   }

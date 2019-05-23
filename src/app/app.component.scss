@@ -1,25 +1,7 @@
-@media (min-width: 768px) {
-    .view {
-        overflow: visible;
-        margin-top: -56px;
-    }
-}
-.navbar {
-    z-index: 1;
-}
-
-html,
-body,
-header,
-.view {
-  height: 100%;
-}
-
-.bg{
-    background: url("https://nyc3.digitaloceanspaces.com/servercarlosesverde/elevenews/wp-content/uploads/2018/12/12222219/Party.jpg")no-repeat center center;
-    background-size: cover;
-}
-
-.bg .mask{
-    height: 750px;
-}
+.col{
+    background-color:rgba(235, 214, 214, 0.85);
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
