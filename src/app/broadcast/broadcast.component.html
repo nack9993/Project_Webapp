@@ -1,18 +1,16 @@
-<div class="container" style="width: 30%">
+<div class="container animated fadeIn"  style="width: 60%">
   <div class="form">
 
-      <select class="selectpicker" multiple data-live-search="true">
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
-        </select>
+    <div class="md-form md-outline">
+      <textarea type="text" id="form75" class="form-control md-textarea" rows="3" mdbInput></textarea>
+      <label for="form75">Message</label>
+    </div>
 
-      <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Message</span>
-          </div>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
+    <label>Upload Image</label>
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput><br>
+  <button (click)="fileInput.click()">Select File</button>
+  <button (click)="onUpload()">Upload!</button>
+    
         <div class="row justify-content-center">
             <button class="btn " (click)="submit()" style="margin-top: 5%; width: 100%;color: black">Submit</button>
         </div>

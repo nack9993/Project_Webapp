@@ -7,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BroadcastComponent implements OnInit {
 
-  userId: String;
+  image: String;
   constructor() { }
 
   ngOnInit() {
   }
 
-  submit() {
-    if (this.userId) {}
+  onFileChanged(event) {
+    const file = event.target.files[0]
+    alert(file);
   }
 
 }
