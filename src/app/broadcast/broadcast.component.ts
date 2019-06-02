@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BroadcastComponent implements OnInit {
 
+  userId: String;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submit() {
+    if (this.userId) {}
   }
 
 }

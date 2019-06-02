@@ -22,13 +22,11 @@ body {
     position: fixed;
     margin-left: 4%;
     display: block;
-    background-color:#DDE0E5;
+    background-color:whitesmoke;
     padding : 30px;
     border-radius: 5px;
+    box-shadow: 10px 10px 5px grey;
   
-  }
-  ::placeholder {
-    color: #ffffff;
   }
   
   .login_area button {
@@ -41,6 +39,7 @@ body {
     transition: all 0.3s ease;
     cursor: pointer;
   }
+
   .login_area button:hover {
     background: #020701;
     color:  rgba(228, 169, 169, 0.918);

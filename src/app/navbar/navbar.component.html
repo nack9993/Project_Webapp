@@ -1,44 +1,43 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark rgba-red-strong" [containerInside]="false">
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav">
+
+<nav class="navbar navbar-expand-lg navbar-transparent fixed-top" id="mainNav" color-on-scroll="500">
+    <div class="container">
+    <a class="navbar-brand js-scroll-trigger" >Marry Marriage</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav  text-uppercase ml-auto">
       <li class="nav-item">
-        <a class="nav-link waves-light"  mdbWavesEffect routerLink="/broadcast">
-            <mdb-icon fas icon="home"></mdb-icon>
+        <a class="nav-link js-scroll-trigger"  routerLink="/home">
           Homepage</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light"  mdbWavesEffect routerLink="/photo">
-            <mdb-icon fas icon="home"></mdb-icon>
+        <a class="nav-link js-scroll-trigger"  routerLink="/photo">
+  
           Photo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light"  mdbWavesEffect routerLink="/guest">
-            <mdb-icon fas icon="home"></mdb-icon>
+        <a class="nav-link js-scroll-trigger"  routerLink="/guest">
           Guest</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link waves-light"  mdbWavesEffect routerLink="/table">
-              <mdb-icon fas icon="home"></mdb-icon>
+          <a class="nav-link js-scroll-trigger"  routerLink="/table">
             Table</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link waves-light"  mdbWavesEffect routerLink="/broadcast">
-                <mdb-icon fas icon="home"></mdb-icon>
+            <a class="nav-link js-scroll-trigger"  routerLink="/broadcast">
               Broadcast</a>
           </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
-      </li>
       <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" >
           <mdb-icon fas icon="user"></mdb-icon> <span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Log out</a>
+          <a class="dropdown-item waves-light"  (click)="logout()">Log out</a>
         </div>
       </li>
     </ul>
-  </links>
-</mdb-navbar>
+
+    </div>
+</div>
+  </nav>
