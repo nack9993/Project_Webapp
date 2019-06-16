@@ -23,6 +23,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { TableComponent } from './table/table.component';
 import { ContactComponent } from './contact/contact.component';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ContactComponent } from './contact/contact.component';
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
