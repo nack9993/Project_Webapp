@@ -1,17 +1,10 @@
 <div class="container">
 <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
     <mdb-carousel-item *ngFor="let item of items | async">
-      <img class="d-block w-100" [src]='profileUrl2 | async' alt="Third slide">
+      <img class="d-block w-100 h-100" [src]='item.path'>
     </mdb-carousel-item>
   </mdb-carousel>
 </div>
-
-<ul>
-  <li *ngFor="let item of items | async">
-    <img class="d-block w-100" [src]='item.path' alt="Third slide">
- </li>
-</ul>
-
   <script>
     var slideIndex = 0;
     showSlides();
