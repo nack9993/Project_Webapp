@@ -25,6 +25,7 @@ import { TableComponent } from './table/table.component';
 import { ContactComponent } from './contact/contact.component';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { WishComponent } from './wish/wish.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { WishComponent } from './wish/wish.component';
     HomeComponent,
     TableComponent,
     ContactComponent,
-    WishComponent
+    WishComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

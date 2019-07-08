@@ -20,7 +20,7 @@ export class PhotoComponent implements OnInit {
   url: Observable<string []>;
   text: String;
 
-  constructor(private storage: AngularFireStorage,private afs: AngularFirestore,private dom: DomSanitizer) {
+  constructor(private storage: AngularFireStorage,private afs: AngularFirestore) {
     this.itemsCollection = afs.collection<Item>('photos');
     this.items = this.itemsCollection.valueChanges();
     

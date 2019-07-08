@@ -70,4 +70,14 @@ export class AuthService {
         this.router.navigate(['/login']);
       })
   }
+
+  resetPassword(email:string){
+    console.log('reset');
+    return this.firebaseAuth.auth.sendPasswordResetEmail(email)
+    .then( value => {
+      console.log(value);
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
 }

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  loginByService() {
     if (this.email && this.password ) {
       this.auth.login(this.email, this.password).then( (result) => {
         if (result === "Fail") {
