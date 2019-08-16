@@ -8,12 +8,12 @@
             <input mdbInput [(ngModel)]="email" type="email" class="form-control needs-validation" id="email" required>
             <label>Email</label>
             <div class="invalid-feedback">Please input email.</div>
-        <div  class="md-form">
+        <!-- <div  class="md-form">
             <input mdbInput [(ngModel)]="password" type="password" class="form-control" id="password" required>
             <label>Password</label>
-          </div>
+          </div> -->
         <div class="row justify-content-center">
-            <button class="btn btn-dark" (click)="register()" style="margin-top: 5%; width: 100%;">Register</button>
+            <button class="btn btn-dark" (click)="registerByGenerateRandomPassword()" style="margin-top: 5%; width: 100%;">Register</button>
         </div>
       </div>
         <div class="row justify-content-center" style="margin-top: 10px">

@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { WishComponent } from './wish/wish.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'table',component:TableComponent},
   {path: 'home', component:HomeComponent},
   {path: 'contact', component:ContactComponent},
-  {path: 'wish', component:WishComponent}
+  {path: 'wish', component:WishComponent},
+  {path: 'admin', component:AdminComponent}
 ];
 
 @NgModule({
