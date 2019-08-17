@@ -52,13 +52,11 @@ export class AuthService {
         let uid = value.user.uid;
         console.log("Login with uid:" + uid);
         this.router.navigate(['/guest']);
-        // alert("Login success.");
         return uid;
       })
       .catch(err => {
-        console.log('Something went wrong:',err.message);
         this.router.navigate(['/login']);
-        // alert("Authentication failed.");
+        console.log("Fail");
         return "Fail";
       });
   }

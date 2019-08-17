@@ -20,3 +20,12 @@
     transition: all 0.3s ease;
     cursor: pointer;
   }
+  
+  img{
+    width: 100px;
+    height: 100px;
+  }
+
+  progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+  }

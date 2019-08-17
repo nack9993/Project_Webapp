@@ -37,10 +37,10 @@ export class RegisterComponent implements OnInit {
             break;
           default:
             alert("Success, the information added into the system.");
+            this.resetpassword(this.email);
             break;
         }
       }).then((result) => {
-        this.resetpassword(this.email);
         this.email = this.password = '';
       })
     } else {
