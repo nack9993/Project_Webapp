@@ -9,8 +9,9 @@ import {AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PhotoComponent } from './photo/photo.component';
@@ -52,7 +53,8 @@ import { AdminComponent } from './admin/admin.component';
     FormsModule,
     AngularFireAuthModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
