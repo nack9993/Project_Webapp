@@ -27,6 +27,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { WishComponent } from './wish/wish.component';
 import { AdminComponent } from './admin/admin.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AdminComponent } from './admin/admin.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
