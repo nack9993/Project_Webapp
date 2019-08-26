@@ -36,15 +36,23 @@ export class BroadcastComponent implements OnInit {
   }
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
+  messageDBs: Observable<Item[]>;
   uploadProgress: Observable<number>;
   downloadURL: Observable<any>;
   url: Observable<string []>;
   name : string;
+  dateMessage: string;
+
   
-  constructor(private datePipe: DatePipe,private http:HttpClient,private storage: AngularFireStorage, private router: Router,private afs: AngularFirestore) {
+  constructor(private datePipe: DatePipe,private http:HttpClient,private storage: AngularFireStorage, 
+    private router: Router,private afs: AngularFirestore,) {
     this.itemsCollection = this.afs.collection<Item>('BroadcastPhoto');
      this.items = this.itemsCollection.valueChanges();
      console.log(this.items);
+     this.itemsCollection = this.afs.collection<Item>('BroadcastMessage');
+      this.messageDBs = this.itemsCollection.valueChanges();
+     console.log(this.messageDBs);
+ 
   }
   
   ngOnInit() {
@@ -58,9 +66,7 @@ export class BroadcastComponent implements OnInit {
     setTimeout( () => {
       this.downloadURL = this.storage.ref(this.name).getDownloadURL();
       this.uploadStatus = true;
-      this.itemsCollection = this.afs.collection<Item>('BroadcastPhoto');
-     this.items = this.itemsCollection.valueChanges();
-     this.itemsCollection.add({path: this.name });
+     this.itemsCollection.add({path: this.name});
   }, 3000);
   }
 
@@ -75,6 +81,8 @@ export class BroadcastComponent implements OnInit {
       ]
   }), this.options).toPromise().then((result) => {
     console.log(result);
+    this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+    this.itemsCollection.add({ path: this.message});
     this.router.navigate(['/home']);
     alert("Broadcast message is success");
   }).catch(err => {

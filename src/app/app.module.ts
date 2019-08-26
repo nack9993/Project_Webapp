@@ -24,10 +24,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { TableComponent } from './table/table.component';
 import { ContactComponent } from './contact/contact.component';
-import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireStorageModule} from 'angularfire2/storage';
 import { WishComponent } from './wish/wish.component';
 import { AdminComponent } from './admin/admin.component';
 import { DatePipe } from '@angular/common';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DatePipe } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,

@@ -78,9 +78,11 @@
         <th scope="row"> </th>
         <img class="d-block w-1 h-1" [src]='item.path'>
         <td>{{items.name}}</td>
-        <td>
-          <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" (click)="click(item.name,item.path)">Delete</button>
-        </td>
+      </tr>
+      <tr mdbTableCol *ngFor="let messageDB of messageDBs | async">
+        <th scope="row"> </th>
+        <td>{{messageDB.path}}</td>
+        <td>{{messageDB.message}}</td>
       </tr>
     </tbody>
   </table>
