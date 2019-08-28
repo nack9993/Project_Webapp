@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable, Timestamp } from 'rxjs';
-import {DomSanitizer} from '@angular/platform-browser';
-import { JsonPipe } from '@angular/common';
 
 export interface Item { path: string; }
 
