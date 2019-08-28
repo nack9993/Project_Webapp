@@ -64,5 +64,27 @@
         <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
   </div>
   </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-  
+<div class="container">
+  <table mdbTable striped="true">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let item of items | async">
+        <th scope="row"> </th>
+        <img class="d-block w-1 h-1" [src]='item.path'>
+        <td>{{items.name}}</td>
+      </tr>
+      <tr mdbTableCol *ngFor="let messageDB of messageDBs | async">
+        <th scope="row"> </th>
+        <td>{{messageDB.path}}</td>
+        <td>{{messageDB.message}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
