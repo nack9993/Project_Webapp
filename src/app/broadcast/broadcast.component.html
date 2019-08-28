@@ -77,12 +77,12 @@
       <tr mdbTableCol *ngFor="let item of items | async">
         <th scope="row"> </th>
         <img class="d-block w-1 h-1" [src]='item.path'>
-        <td>{{items.name}}</td>
+        <td>{{item.date}}</td>
       </tr>
       <tr mdbTableCol *ngFor="let messageDB of messageDBs | async">
         <th scope="row"> </th>
         <td>{{messageDB.path}}</td>
-        <td>{{messageDB.message}}</td>
+        <td>{{messageDB.date}}</td>
       </tr>
     </tbody>
   </table>

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Item } from '../photo/photo.component';
 import { DatePipe } from '@angular/common';
-
+export interface History { path: string , date : string; }
 @Component({
   selector: 'app-broadcast',
   templateUrl: './broadcast.component.html',
@@ -34,9 +34,10 @@ export class BroadcastComponent implements OnInit {
   options = {
     headers: this.headers
   }
-  private itemsCollection: AngularFirestoreCollection<Item>;
-  items: Observable<Item[]>;
-  messageDBs: Observable<Item[]>;
+  private itemsCollection: AngularFirestoreCollection<History>;
+  private PhotoCollection: AngularFirestoreCollection<History>;
+  items: Observable<History[]>;
+  messageDBs: Observable<History[]>;
   uploadProgress: Observable<number>;
   downloadURL: Observable<any>;
   url: Observable<string []>;
@@ -46,12 +47,10 @@ export class BroadcastComponent implements OnInit {
   
   constructor(private datePipe: DatePipe,private http:HttpClient,private storage: AngularFireStorage, 
     private router: Router,private afs: AngularFirestore,) {
-    this.itemsCollection = this.afs.collection<Item>('BroadcastPhoto');
-     this.items = this.itemsCollection.valueChanges();
-     console.log(this.items);
-     this.itemsCollection = this.afs.collection<Item>('BroadcastMessage');
+    this.PhotoCollection = this.afs.collection<History>('BroadcastPhoto');
+     this.items = this.PhotoCollection.valueChanges();
+     this.itemsCollection = this.afs.collection<History>('BroadcastMessage');
       this.messageDBs = this.itemsCollection.valueChanges();
-     console.log(this.messageDBs);
  
   }
   
@@ -59,20 +58,19 @@ export class BroadcastComponent implements OnInit {
   }
 
    upload(event) {
-    this.name = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+    this.name = Math.random().toString(36).substring(2);
     const ref = this.storage.ref(this.name);
     this.task = ref.put(event.target.files[0]);
     this.uploadProgress = this.task.percentageChanges();
     setTimeout( () => {
       this.downloadURL = this.storage.ref(this.name).getDownloadURL();
       this.uploadStatus = true;
-     this.itemsCollection.add({path: this.name});
+     this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
   }, 3000);
   }
 
   submit(message){
     return this.http.post(this.Url, JSON.stringify({
-      "to": "U927911d27fba066bde65dd5e0780c8b0",
       "messages":[
           {
               "type":"text",
@@ -82,7 +80,7 @@ export class BroadcastComponent implements OnInit {
   }), this.options).toPromise().then((result) => {
     console.log(result);
     this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-    this.itemsCollection.add({ path: this.message});
+    this.itemsCollection.add({ path: this.message , date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
     this.router.navigate(['/home']);
     alert("Broadcast message is success");
   }).catch(err => {
@@ -91,9 +89,9 @@ export class BroadcastComponent implements OnInit {
   });;
   }
 
-  submitPicture(randomId){
+  submitPicture(name){
+    console.log('https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media');
     return this.http.post(this.Url, JSON.stringify({
-      "to": "U927911d27fba066bde65dd5e0780c8b0",
       "messages":[
           {
               "type":"image",
@@ -101,7 +99,7 @@ export class BroadcastComponent implements OnInit {
               "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media'
           }
       ]
-  }), this.options).toPromise().then( (result) => {
+  }), this.options).toPromise().then((result) => {
     console.log(JSON.stringify(result));
     alert("Broadcast picture is success");
     this.router.navigate(['/home']);
