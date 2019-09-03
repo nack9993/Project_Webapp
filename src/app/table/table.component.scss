@@ -1,37 +1,41 @@
+
 .example-box {
-  width: 100px;
-  height: 50px;
-  border: solid 1px #ccc;
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
-  cursor: move;
-  display: inline-flex;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  background: #fff;
-  border-radius: 4px;
-  margin-right: 25px;
-  position: relative;
-  z-index: 1;
+  justify-content: space-between;
   box-sizing: border-box;
-  padding: 10px;
-  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-              0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+
+.example-list {
+  width: 500px;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .tablePlan{
   width: 150px;
   height: 150px;
   border: solid 1px #ccc;
-  color: rgba(187, 57, 57, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   cursor: move;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgb(255, 132, 0);
+  background: rgb(253, 123, 145);
   border-radius: 20px;
   margin-right: 100px;
   position: relative;
@@ -44,12 +48,6 @@
               0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-.chair{ 
-  width: 50px;
-  height: 50px;
-  max-width: 100%;
-  border: dotted #ccc 2px;
-}
 .example-box:active {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -61,50 +59,6 @@
   height: 700px;
   max-width: 100%;
   border: dotted #ccc 2px;
-}
-
-[mwlDraggable] {
-  background-color: rgb(0, 0, 0);
-  width: 100px;
-  height: 50px;
-  position: relative;
-  z-index: 2;
-  float: left;
-  margin-right: 10px;
-  color: rgb(231, 12, 12);
-  cursor: move;
-}
-
-// [mwlDroppable] {
-//   width: 150px;
-//   height: 150px;
-//   border: solid 1px #ccc;
-//   color: rgba(187, 57, 57, 0.87);
-//   cursor: move;
-//   display: inline-flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: center;
-//   background: rgb(95, 95, 95);
-//   border-radius: 4px;
-//   margin-right: 100px;
-//   position: relative;
-//   z-index: 1;
-//   box-sizing: border-box;
-//   padding: 10px;
-//   transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
-//   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-//               0 2px 2px 0 rgba(0, 0, 0, 0.14),
-//               0 1px 5px 0 rgba(0, 0, 0, 0.12);
-// }
-
-[mwlDraggable],
-[mwlDroppable] {
-  color: white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .drop-over-active {
