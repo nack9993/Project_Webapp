@@ -90,7 +90,6 @@ export class BroadcastComponent implements OnInit {
   }
 
   submitPicture(name){
-    console.log('https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media');
     return this.http.post(this.Url, JSON.stringify({
       "messages":[
           {

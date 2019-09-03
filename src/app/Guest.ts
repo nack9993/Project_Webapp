@@ -4,4 +4,5 @@ export class Guest {
     guestType: string;
     guestAcceptance : string;
     weddingWish : string;
+    userId : string;
 }
