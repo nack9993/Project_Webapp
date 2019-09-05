@@ -4,6 +4,7 @@ import { Guest } from '../Guest';
 import { DragAndDropModule, DropEvent } from 'angular-draggable-droppable';
 import { DragAxis } from 'angular-draggable-droppable/lib/draggable.directive';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -14,7 +15,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export class TableComponent implements OnInit {
   message: any;
-  constructor(private guestService: GuestService,private http:HttpClient) {  }
+  constructor(private guestService: GuestService,private http:HttpClient,private fb: FormBuilder) {  }
 
   someVariable: Array<Array<string | number>> =[];
   values: Array<string | number> = []; 
@@ -25,6 +26,7 @@ export class TableComponent implements OnInit {
   guestsTemp: Guest[];
   droppedData: string;
   tableName: string;
+  form: FormGroup;
   
   Url = 'https://api.line.me/v2/bot/message/broadcast';  
   headers = new HttpHeaders({'Content-Type': 'application/json',
@@ -37,6 +39,10 @@ export class TableComponent implements OnInit {
     headers: this.headers
   }
   ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', [Validators.required]]
+    })
+    
     this.getGuests();
   }
 
@@ -47,7 +53,7 @@ export class TableComponent implements OnInit {
 
   addTable(){
     this.tables.push(this.table);
-    this.someVariable.push([this.table,0,this.tableName])
+    this.someVariable.push([this.table,this.tableName])
     this.table++;
     console.log(this.someVariable);
     this.tableName="";
@@ -62,9 +68,9 @@ export class TableComponent implements OnInit {
   onDrop({dropData}: DropEvent<string>,item): void {
     alert("Table A"+item+" "+dropData.guestName)
     this.droppedData = dropData;
-    this.chair = this.someVariable[item][1];
-    this.chair++;
-    this.someVariable[item][1] = this.chair;
+    // this.chair = this.someVariable[item][1];
+    // this.chair++;
+    // this.someVariable[item][1] = this.chair;
     this.someVariable[item].push(dropData.guestName);
     this.someVariable[item].push(dropData.userId);
     this.removeItem(dropData, this.guests);
