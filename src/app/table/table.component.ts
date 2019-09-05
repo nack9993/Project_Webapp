@@ -24,7 +24,7 @@ export class TableComponent implements OnInit {
   guests: Guest[];
   guestsTemp: Guest[];
   droppedData: string;
-
+  tableName: string;
   
   Url = 'https://api.line.me/v2/bot/message/broadcast';  
   headers = new HttpHeaders({'Content-Type': 'application/json',
@@ -47,9 +47,10 @@ export class TableComponent implements OnInit {
 
   addTable(){
     this.tables.push(this.table);
-    this.someVariable.push(["A"+this.table,0])
+    this.someVariable.push([this.table,0,this.tableName])
     this.table++;
     console.log(this.someVariable);
+    this.tableName="";
   }
 
   deleteTable(){
