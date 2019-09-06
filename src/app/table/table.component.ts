@@ -4,7 +4,13 @@ import { Guest } from '../Guest';
 import { DragAndDropModule, DropEvent } from 'angular-draggable-droppable';
 import { DragAxis } from 'angular-draggable-droppable/lib/draggable.directive';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-
+import { Observable } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Router } from '@angular/router';
+import { isNgTemplate } from '@angular/compiler';
+import { DatePipe } from '@angular/common';
+export interface TabMessage {path: string, date: string};
+// export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -13,8 +19,17 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 
 export class TableComponent implements OnInit {
-  message: any;
-  constructor(private guestService: GuestService,private http:HttpClient) {  }
+  message: string;
+  private itemsCollection: AngularFirestoreCollection<TabMessage>;
+  tabMessage: Observable<TabMessage[]>;
+  userId: string;
+
+  constructor(private guestService: GuestService,private http:HttpClient,
+    private tab: AngularFirestore,private router: Router,private datePipe: DatePipe) {
+      this.itemsCollection = this.tab.collection<TabMessage>('TableMessage');
+      this.tabMessage = this.itemsCollection.valueChanges();
+
+    }
 
   someVariable: Array<Array<string | number>> =[];
   values: Array<string | number> = []; 
@@ -25,6 +40,7 @@ export class TableComponent implements OnInit {
   guestsTemp: Guest[];
   droppedData: string;
   tableName: string;
+  dateTab: string;
   
   Url = 'https://api.line.me/v2/bot/message/broadcast';  
   headers = new HttpHeaders({'Content-Type': 'application/json',
@@ -49,8 +65,8 @@ export class TableComponent implements OnInit {
     this.tables.push(this.table);
     this.someVariable.push([this.table,0,this.tableName])
     this.table++;
-    console.log(this.someVariable);
-    this.tableName="";
+    console.log(this.tableName);
+    this.tableName= this.someVariable[this.tableName];
   }
 
   deleteTable(){
@@ -77,24 +93,23 @@ export class TableComponent implements OnInit {
     list.splice(index, 1);
   }
 
-  sendBroadCastTable(){
-    for(let table of this.someVariable){
-    console.log("Your table is "+table[0]);
-    }
-
-  //   return this.http.post(this.Url, JSON.stringify({
-  //     "messages":[
-  //         {
-  //             "type":"text",
-  //             "text":this.message
-  //         },
-  //     ]
-  // }), this.options).toPromise().then((result) => {
-  //   console.log(result);
-  //   alert("Broadcast message is success");
-  // }).catch(err => {
-  //   alert('Something went wrong:'+ err.message);
-  // });;
+  sendBroadCastTable(someVariable){
+    // for(let table of this.someVariable){ 
+      return this.http.post(this.Url, JSON.stringify({
+            "messages":[
+                {
+                    "type":"text",
+                    "text":this.someVariable[2]
+                },
+            ]
+        }), this.options).toPromise().then((result) => {
+          console.log(result);
+          this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+          this.itemsCollection.add({path: this.someVariable[this.tableName], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
+          alert("Broadcast message is success");
+        }).catch(err => {
+          alert('Something went wrong:'+ err.message);
+        });;
+      // } 
   }
-
-}
+  }

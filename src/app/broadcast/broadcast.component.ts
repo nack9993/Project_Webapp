@@ -46,7 +46,7 @@ export class BroadcastComponent implements OnInit {
 
   
   constructor(private datePipe: DatePipe,private http:HttpClient,private storage: AngularFireStorage, 
-    private router: Router,private afs: AngularFirestore,) {
+    private router: Router,private afs: AngularFirestore) {
     this.PhotoCollection = this.afs.collection<History>('BroadcastPhoto');
      this.items = this.PhotoCollection.valueChanges();
      this.itemsCollection = this.afs.collection<History>('BroadcastMessage');
