@@ -6,17 +6,40 @@
 			<div class="modal-header">
 			  <h4 class="modal-title w-100" id="myModalLabel">Enter Table name</h4>
 			</div>
+			<form [formGroup]="form">
 			<div class="modal-body">
 					<div class="md-form md-outline">
-							<input type="text" [(ngModel)]="tableName" class="form-control mb-4" placeholder="Table Name">
+							<input mdbInput  mdbValidate formControlName="name" type="text" [(ngModel)]="tableName" class="form-control mb-4" placeholder="Table Name">
 					</div>
 				
 						<div class="row justify-content-center">
-							<button class="btn " (click)="addTable()" style="margin-top: 5%; width: 100%;color: black">Submit</button>
+							<button class="btn " (click)="addTable();basicModal.hide()" style="margin-top: 5%; width: 50%;color: black" [disabled]="form.invalid">Submit</button>
 						</div>
 			</div>
+		</form>
 			<div class="modal-footer">
 			  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+<div mdbModal #objectModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title w-100" id="myModalLabel">Add Object</h4>
+			</div>
+			<form [formGroup]="form">
+			<div class="modal-body">
+					<div class="md-form md-outline">
+							<button mdbBtn color="pink">Stage</button>
+					</div>
+			</div>
+		</form>
+			<div class="modal-footer">
+			  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="objectModal.hide()" mdbWavesEffect>Close</button>
 			</div>
 		  </div>
 		</div>
@@ -26,42 +49,43 @@
 <section class="my-5">
 		<div class="row">
 				<div class="col-lg-3">
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-		<div class="example-box"
-		 *ngFor="let guest of guests"
-		  mwlDraggable
-		   dragActiveClass="drag-active"
-			[dropData]=guest [dropData]=guest ghostDragEnabled=false cdkDragBoundary=".example-boundary">{{guest.guestName}} {{guest.guestType}}</div>
-		</div>
-	</div>
+					<p style="margin-left: 20%;">Guest List</p>
+					<div cdkDropList class="example-list z-depth-1" (cdkDropListDropped)="drop($event)" >
+						<div class="example-box" *ngFor="let guest of guests"  mwlDraggable dragActiveClass="drag-active"
+						[dropData]=guest [dropData]=guest ghostDragEnabled=false cdkDragBoundary=".example-boundary">{{guest.guestName}} {{guest.guestType}}</div>
+					</div>
+			</div>
 	
 	<div class="col-lg-8">
 		<div class="example-boundary">
-			<div class="tablePlan" *ngFor="let table of tables " cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table,$event)" cdkDragBoundary=".example-boundary">
-				Table {{table}}
+			<div class="tablePlan" *ngFor="let table of someVariable" cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])" cdkDragBoundary=".example-boundary">
+				Table {{table[0]}}<br>
+				{{table[1]}}
 				</div>
 
 				</div>
-
-				<button  mdbBtn color="indigo" size="sm" (click)="basicModal.show()">Add</button>
-				<button   mdbBtn color="indigo" size="sm" (click)="deleteTable()">Delete</button>
+			
+				<button  mdbBtn color="pink" size="m" (click)="basicModal.show()"  style="margin-left: 40%;">Add</button>
+				<button  mdbBtn color="pink" size="m" (click)="objectModal.show()" >Add Object</button>
+				<button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button>
 
 		<table mdbTable striped="true">
 		  <thead>
 			<tr>
-			  <th scope="col"></th>
+			  <th scope="col">Table Name</th>
+			  <th scope="col">Table Number</th>
+			  <th scope="col">Table Name</th>
+			  <th scope="col">Guests</th>
 			</tr>
 		  </thead>
 		  <tbody>
 			<tr mdbTableCol *ngFor="let some of someVariable">
 			<th scope="row">Table {{some[0]}}</th>
-			<span *ngFor="let so of some">
-			<td>{{so}}</td>
-			</span>
+			<td *ngFor="let so of some">{{so}}</td>
 			</tr>
 		  </tbody>
 		</table>
-		<button mdbBtn color="indigo" size="sm" (click)="sendBroadCastTable()" >Send</button>
+		<button mdbBtn color="indigo" size="m" (click)="sendBroadCastTable()"  style="width: 50%;margin-left: 25%">Send</button>
 		</div>
 		</div>
 	</section>
