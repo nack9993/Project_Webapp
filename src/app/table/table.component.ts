@@ -26,10 +26,8 @@ export class TableComponent implements OnInit {
   private itemsCollection: AngularFirestoreCollection<TabMessage>;
   tabMessage: Observable<TabMessage[]>;
   userId: string;
-  constructor(private guestService: GuestService,private http:HttpClient,private fb: FormBuilder) {  }
-
   constructor(private guestService: GuestService,private http:HttpClient,
-    private tab: AngularFirestore,private router: Router,private datePipe: DatePipe) {
+    private tab: AngularFirestore,private router: Router,private datePipe: DatePipe,private fb: FormBuilder) {
       this.itemsCollection = this.tab.collection<TabMessage>('TableMessage');
       this.tabMessage = this.itemsCollection.valueChanges();
 
