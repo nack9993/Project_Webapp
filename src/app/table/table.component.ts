@@ -5,6 +5,7 @@ import { DragAndDropModule, DropEvent } from 'angular-draggable-droppable';
 import { DragAxis } from 'angular-draggable-droppable/lib/draggable.directive';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-table',

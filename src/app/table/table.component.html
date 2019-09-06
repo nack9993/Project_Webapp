@@ -24,26 +24,49 @@
 		</div>
 	  </div>
 
+
+<div mdbModal #objectModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title w-100" id="myModalLabel">Add Object</h4>
+			</div>
+			<form [formGroup]="form">
+			<div class="modal-body">
+					<div class="md-form md-outline">
+							<button mdbBtn color="pink">Stage</button>
+					</div>
+			</div>
+		</form>
+			<div class="modal-footer">
+			  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="objectModal.hide()" mdbWavesEffect>Close</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
 	  
 <section class="my-5">
 		<div class="row">
 				<div class="col-lg-3">
-					<h5 style="margin-left: 20%;">Guest List</h5>
-					<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+					<p style="margin-left: 20%;">Guest List</p>
+					<div cdkDropList class="example-list z-depth-1" (cdkDropListDropped)="drop($event)" >
 						<div class="example-box" *ngFor="let guest of guests"  mwlDraggable dragActiveClass="drag-active"
 						[dropData]=guest [dropData]=guest ghostDragEnabled=false cdkDragBoundary=".example-boundary">{{guest.guestName}} {{guest.guestType}}</div>
-						</div>
+					</div>
 			</div>
 	
 	<div class="col-lg-8">
 		<div class="example-boundary">
 			<div class="tablePlan" *ngFor="let table of someVariable" cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])" cdkDragBoundary=".example-boundary">
-				Table {{table[1]}}
+				Table {{table[0]}}<br>
+				{{table[1]}}
 				</div>
 
 				</div>
-
+			
 				<button  mdbBtn color="pink" size="m" (click)="basicModal.show()"  style="margin-left: 40%;">Add</button>
+				<button  mdbBtn color="pink" size="m" (click)="objectModal.show()" >Add Object</button>
 				<button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button>
 
 		<table mdbTable striped="true">
