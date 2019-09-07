@@ -34,7 +34,9 @@
 			<form [formGroup]="form">
 			<div class="modal-body">
 					<div class="md-form md-outline">
-							<button mdbBtn color="pink">Stage</button>
+							<button mdbBtn color="pink" (click)="addRectangle();objectModal.hide()">Rectangle</button>
+							<button mdbBtn color="pink"  (click)="addSquare();objectModal.hide()">Square</button>
+							<button mdbBtn color="pink"  (click)="addRound();objectModal.hide()">Round</button>
 					</div>
 			</div>
 		</form>
@@ -50,24 +52,42 @@
 		<div class="row">
 				<div class="col-lg-3">
 					<p style="margin-left: 20%;">Guest List</p>
-					<div cdkDropList class="example-list z-depth-1" (cdkDropListDropped)="drop($event)" >
+					<div cdkDropList class="example-list z-depth-1">
 						<div class="example-box" *ngFor="let guest of guests"  mwlDraggable dragActiveClass="drag-active"
-						[dropData]=guest [dropData]=guest ghostDragEnabled=false cdkDragBoundary=".example-boundary">{{guest.guestName}} {{guest.guestType}}</div>
+						[dropData]=guest cdkDragBoundary=".example-boundary">
+						<p>
+						<mdb-icon fas icon="male" size="3x" class="red-text pr-2 ml-3" aria-hidden="true"></mdb-icon>
+						{{guest.guestName}} {{guest.guestType}}</p></div>
 					</div>
 			</div>
 	
 	<div class="col-lg-8">
 		<div class="example-boundary">
+
 			<div class="tablePlan" *ngFor="let table of someVariable" cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])" cdkDragBoundary=".example-boundary">
 				Table {{table[0]}}<br>
 				{{table[1]}}
 				</div>
 
-				</div>
+				
+			<div class="rectangle" *ngFor="let rec of rectangles" cdkDrag mwlDroppable dragOverClass="drop-over-active" cdkDragBoundary=".example-boundary">
+				<br>
+			</div>
+
+			<div class="square" *ngFor="let sqe of squares" cdkDrag mwlDroppable dragOverClass="drop-over-active" cdkDragBoundary=".example-boundary" >
+				<br>
+			</div>
+
+			<div class="round" *ngFor="let rou of rounds" cdkDrag mwlDroppable dragOverClass="drop-over-active" cdkDragBoundary=".example-boundary">
+				<br>
+			</div>
+				
+			</div>
+
 			
 				<button  mdbBtn color="pink" size="m" (click)="basicModal.show()"  style="margin-left: 35%;">Add</button>
 				<button  mdbBtn color="pink" size="m" (click)="objectModal.show()" >Add Object</button>
-				<button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button>
+				<!-- <button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button> -->
 
 		<table mdbTable striped="true">
 		  <thead>
@@ -80,7 +100,7 @@
 		  </thead>
 		  <tbody>
 			<tr mdbTableCol *ngFor="let some of someVariable">
-			<th scope="row">Table {{some[0]}}</th>
+			<th scope="row">Table {{some[0]}} 	<button mdbBtn color="indigo" size="m" (click)="removeTable(some[0],someVariable)">Remove</button></th>
 			<td *ngFor="let so of some">{{so}}</td>
 			</tr>
 		  </tbody>

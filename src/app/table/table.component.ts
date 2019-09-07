@@ -1,18 +1,15 @@
 import { Component, OnInit} from '@angular/core';
 import { GuestService } from '../guest.service';
 import { Guest } from '../Guest';
-import { DragAndDropModule, DropEvent } from 'angular-draggable-droppable';
-import { DragAxis } from 'angular-draggable-droppable/lib/draggable.directive';
+import {  DropEvent } from 'angular-draggable-droppable';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
-import { isNgTemplate } from '@angular/compiler';
 import { DatePipe } from '@angular/common';
 export interface TabMessage {path: string, date: string};
 // export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-table',
@@ -39,6 +36,14 @@ export class TableComponent implements OnInit {
   table = 0
   tables = []
   chair;
+
+  rectangle = 0;
+  rectangles = [];
+  square = 0;
+  squares =[];
+  round = 0;
+  rounds = [];
+
   guests: Guest[];
   guestsTemp: Guest[];
   droppedData: string;
@@ -69,11 +74,25 @@ export class TableComponent implements OnInit {
     console.log(this.guests);
   }
 
+  addRectangle(){
+    this.rectangles.push(this.rectangle);
+    this.rectangle++;
+  }
+
+  addSquare(){
+    this.squares.push(this.square);
+    this.square++;
+  }
+
+  addRound(){
+    this.rounds.push(this.round);
+    this.round++;
+  }
+
   addTable(){
     this.tables.push(this.table);
     this.someVariable.push([this.table,this.tableName])
     this.table++;
-    console.log(this.tableName);
     this.tableName= this.someVariable[this.tableName];
   }
 
@@ -94,10 +113,21 @@ export class TableComponent implements OnInit {
     this.removeItem(dropData, this.guests);
   }
 
+   onDeleteDrop({dropData}: DropEvent<string>) {
+    this.removeItem(dropData, this.tables);
+  }
+
   removeItem(item: any, list: Array<any>) {
     let index = list.map(function (e) {
       return e.guestName
     }).indexOf(item.guestName);
+    list.splice(index, 1);
+  }
+
+  removeTable(item: any, list: Array<any>) {
+    let index = list.map(function (e) {
+      return e
+    }).indexOf(item);
     list.splice(index, 1);
   }
 
