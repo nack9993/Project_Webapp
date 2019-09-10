@@ -7,7 +7,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
-import { isNgTemplate } from '@angular/compiler';
 import { DatePipe } from '@angular/common';
 export interface TabMessage {path: string, date: string};
 // export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
@@ -107,7 +106,7 @@ export class TableComponent implements OnInit {
             "messages":[
                 {
                     "type":"text",
-                    "text":this.someVariable[2]
+                    "text":this.someVariable[this.tableName]
                 },
             ]
         }), this.options).toPromise().then((result) => {
@@ -117,7 +116,7 @@ export class TableComponent implements OnInit {
           alert("Broadcast message is success");
         }).catch(err => {
           alert('Something went wrong:'+ err.message);
-        });;
+        });
       // } 
   }
   }

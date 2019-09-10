@@ -82,8 +82,11 @@
 			<tr mdbTableCol *ngFor="let some of someVariable">
 			<th scope="row">Table {{some[0]}}</th>
 			<td *ngFor="let so of some">{{so}}</td>
+			<!-- <td>
+				<button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" (click)="click(item.name,item.path)">Delete</button>
+			</td> -->
 			</tr>
-		  </tbody>
+			</tbody>
 		</table>
 		<button mdbBtn color="indigo" size="m" (click)="sendBroadCastTable()"  style="width: 50%;margin-left: 25%">Send</button>
 		</div>
