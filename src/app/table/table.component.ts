@@ -162,7 +162,7 @@ export class TableComponent implements OnInit {
             "messages":[
                 {
                     "type":"text",
-                    "text":this.someVariable[2]
+                    "text":this.someVariable[this.tableName]
                 },
             ]
         }), this.options).toPromise().then((result) => {
@@ -172,7 +172,7 @@ export class TableComponent implements OnInit {
           alert("Broadcast message is success");
         }).catch(err => {
           alert('Something went wrong:'+ err.message);
-        });;
+        });
       // } 
   }
   }
