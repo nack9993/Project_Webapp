@@ -20,6 +20,11 @@ import { TablePlan } from '../TablePlan';
 
 
 export class TableComponent implements OnInit {
+
+  gridSize = 50;
+
+  grids = [0, 50, 100, 150, 200];
+
   message: string;
   private itemsCollection: AngularFirestoreCollection<TabMessage>;
   tabMessage: Observable<TabMessage[]>;
@@ -27,7 +32,7 @@ export class TableComponent implements OnInit {
 
   testGuest : Array<Array<string>> = [];
   testGuest2 : Array<Array<string[]>> = [];
-  BigArray : Array<Array<Array<string | Array<string>> | string  |number>> = [];
+  BigArray : Array<Array<Array<string | Array<string | Array<Guest>>> | string  |number>> = [];
   testArray2 : Array<Array<string | Array<string>> | string |number> = [];
 
   constructor(private guestService: GuestService,private http:HttpClient,
@@ -96,26 +101,23 @@ export class TableComponent implements OnInit {
   }
 
   addTable(){
-    this.tables.push(this.table);
+    // this.tables.push(this.table);
     // this.someVariable.push([this.table,this.tableName])
 
     // this.testArray2.push(this.table,this.tableName);
     // this.BigArray.push(this.testArray2);
 
     this.BigArray.push([this.table,this.tableName,[]]);
-    console.log(this.BigArray);
+    // console.log(this.BigArray);
 
     this.table++;
-    this.tableName= this.someVariable[this.tableName];
-  }
-
-  deleteTable(){
-    this.tables.pop();
-    this.table--;
-    this.someVariable.pop();
+    this.tableName = "";
   }
 
   onDrop({dropData}: DropEvent<Guest>,item): void {
+    console.log(item);
+    console.log(this.BigArray);
+    console.log(this.BigArray[item]);
     alert("Table A"+item+" "+dropData.guestName)
 
     // this.someVariable[item].push(dropData.guestName);
@@ -128,7 +130,7 @@ export class TableComponent implements OnInit {
     // this.testArray2.push([dropData.guestName,dropData.userId]);
 
     this.BigArray[item][2].push([dropData.guestName,dropData.userId]);
-    console.log(this.BigArray);
+    // console.log(this.BigArray);
     // console.log(this.BigArray[0][2][0][0]);
 
     // this.testGuest.push(dropData.guestName,dropData.userId);
@@ -136,7 +138,7 @@ export class TableComponent implements OnInit {
 
     this.removeItem(dropData, this.guests);
     this.guestsTemp.push(dropData);
-    console.log(this.guestsTemp);
+    // console.log(this.guestsTemp);
     // console.log(this.testArray);
   }
 
@@ -155,18 +157,8 @@ export class TableComponent implements OnInit {
   test : Array<Array<string>> = [["Nack"],["Thai"]];
 
   removeGuestFromTable(item: any, list: Array<any>,some: any){
-    // console.log(list.indexOf("0"));
-    // console.log(list[0][2][0].indexOf(["Nack"]));
-    console.log(list[some][2].indexOf(item));
     console.log(item);
     list[some][2].splice(list[some][2].indexOf(item), 1);
-
-    // let index = list[some].map(function (e) {
-    //   return e[0];
-    // }).indexOf(item);
-    // console.log(index);
-    // // list[some][2].splice(index, 1);
-
     console.log(this.guestsTemp);
 
     let indexOftempGuest = this.guestsTemp.map(function (e) {
@@ -177,17 +169,23 @@ export class TableComponent implements OnInit {
     this.guests.push(this.guestsTemp[indexOftempGuest]);
     
     this.guestsTemp.splice(indexOftempGuest,1);
-    // let indexOfGuest = this.guestsTemp.map(function (e) {
-    //   return e.guestName
-    // }).indexOf(item);
-    // this.guestsTemp.splice(indexOfGuest, 1);
 
-    // console.log(this.guestsTemp);
   }
 
   removeTable(item: any, list: Array<any>) {
-    console.log(list.indexOf(item));
+    for(var val of list[list.indexOf(item)][2]){
+      console.log(val[0]);
+    let indexOftempGuest = this.guestsTemp.map(function (e) {
+      return e.guestName
+    }).indexOf(val[0]);
+    console.log(indexOftempGuest);
+    this.guests.push(this.guestsTemp[indexOftempGuest]);
+    console.log(this.guests)
+    // this.guestsTemp.splice(indexOftempGuest,1);
+    }
+    console.log(this.guestsTemp);
     list.splice(list.indexOf(item), 1);
+    this.table--;
   }
 
   sendBroadCastTable(someVariable){
