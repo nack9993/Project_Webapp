@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 export interface TabMessage {path: string, date: string};
 // export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TablePlan } from '../TablePlan';
+// import { TablePlan } from '../TablePlan';
 
 @Component({
   selector: 'app-table',
@@ -43,7 +43,7 @@ export class TableComponent implements OnInit {
     }
 
   someVariable: Array<Array<string | number>> =[];
-  Tableplan : Array<TablePlan> = [];
+  // Tableplan : Array<TablePlan> = [];
   values: Array<string | number> = []; 
   table: number = 0;
   tables = []

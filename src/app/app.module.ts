@@ -1,15 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-
-import {AngularFireModule} from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BroadcastComponent } from './broadcast/broadcast.component';
@@ -24,7 +17,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { TableComponent } from './table/table.component';
 import { ContactComponent } from './contact/contact.component';
-import { AngularFireStorageModule} from 'angularfire2/storage';
 import { WishComponent } from './wish/wish.component';
 import { AdminComponent } from './admin/admin.component';
 import { DragAndDropModule } from 'angular-draggable-droppable';
@@ -48,6 +40,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
     AdminComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
@@ -57,7 +50,6 @@ import { AngularDraggableModule } from 'angular2-draggable';
     MDBBootstrapModule.forRoot(),
     FormsModule,
     AngularFireAuthModule,
-    AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     DragDropModule ,
