@@ -152,33 +152,42 @@ export class TableComponent implements OnInit {
     list.splice(index, 1);
   }
 
-  removeGuestFromTable(item: any, list: Array<any>,some: any){
+  test : Array<Array<string>> = [["Nack"],["Thai"]];
 
-    let index = list[some].map(function (e) {
-      console.log(e)
-      return e[0]
-    }).indexOf(item);
-    list[some][2].splice(index, 1);
+  removeGuestFromTable(item: any, list: Array<any>,some: any){
+    // console.log(list.indexOf("0"));
+    // console.log(list[0][2][0].indexOf(["Nack"]));
+    console.log(list[some][2].indexOf(item));
+    console.log(item);
+    list[some][2].splice(list[some][2].indexOf(item), 1);
+
+    // let index = list[some].map(function (e) {
+    //   return e[0];
+    // }).indexOf(item);
+    // console.log(index);
+    // // list[some][2].splice(index, 1);
+
+    console.log(this.guestsTemp);
 
     let indexOftempGuest = this.guestsTemp.map(function (e) {
       return e.guestName
-    }).indexOf(item);
+    }).indexOf(item[0]);
 
+    console.log(indexOftempGuest);
     this.guests.push(this.guestsTemp[indexOftempGuest]);
     
-    let indexOfGuest = this.guestsTemp.map(function (e) {
-      return e.guestName
-    }).indexOf(item);
-    this.guestsTemp.splice(indexOfGuest, 1);
+    this.guestsTemp.splice(indexOftempGuest,1);
+    // let indexOfGuest = this.guestsTemp.map(function (e) {
+    //   return e.guestName
+    // }).indexOf(item);
+    // this.guestsTemp.splice(indexOfGuest, 1);
 
-    console.log(this.guestsTemp);
+    // console.log(this.guestsTemp);
   }
 
   removeTable(item: any, list: Array<any>) {
-    let index = list.map(function (e) {
-      return e
-    }).indexOf(item);
-    list.splice(index, 1);
+    console.log(list.indexOf(item));
+    list.splice(list.indexOf(item), 1);
   }
 
   sendBroadCastTable(someVariable){
