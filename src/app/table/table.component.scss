@@ -11,6 +11,61 @@
   cursor: move;
   background: white;
   font-size: 14px;
+  float: none;
+}
+
+.rectangle{
+  width: 200px;
+  height: 40px;
+  border: solid 1px #ccc;
+  background: rgb(255, 72, 103);
+  overflow: hidden;
+  display: block;
+  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              float: none;
+}
+
+.square{
+  width: 50px;
+  height: 50px;
+  border: solid 1px #ccc;
+  background: rgb(255, 72, 103);
+  overflow: hidden;
+  display: block;
+  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+  float: none;
+  resize: vertical;
+}
+
+
+.round{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: solid 1px #ccc;
+  background: rgb(255, 72, 103);
+  overflow: hidden;
+  display: block;
+  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              float: none;
 }
 
 
@@ -60,6 +115,8 @@
   height: 700px;
   max-width: 100%;
   border: dotted #ccc 2px;
+  resize: both;
+  overflow: auto;
 }
 
 .drop-over-active {
