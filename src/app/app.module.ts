@@ -30,6 +30,7 @@ import { AdminComponent } from './admin/admin.component';
 import { DragAndDropModule } from 'angular-draggable-droppable';
 import { DatePipe } from '@angular/common';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     HttpClientModule,
     ReactiveFormsModule,
     DragDropModule ,
-    DragAndDropModule
+    DragAndDropModule,
+    AngularDraggableModule
   ],
   providers: [AuthService,DatePipe],
   bootstrap: [AppComponent]
