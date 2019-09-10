@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 export interface TabMessage {path: string, date: string};
 // export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TablePlan } from '../TablePlan';
 
 @Component({
   selector: 'app-table',
@@ -24,6 +25,11 @@ export class TableComponent implements OnInit {
   tabMessage: Observable<TabMessage[]>;
   userId: string;
 
+  testGuest : Array<Array<string>> = [];
+  testGuest2 : Array<Array<string[]>> = [];
+  BigArray : Array<Array<Array<string | Array<string>> | string  |number>> = [];
+  testArray2 : Array<Array<string | Array<string>> | string |number> = [];
+
   constructor(private guestService: GuestService,private http:HttpClient,
     private tab: AngularFirestore,private router: Router,private datePipe: DatePipe,private fb: FormBuilder) {
       this.itemsCollection = this.tab.collection<TabMessage>('TableMessage');
@@ -32,8 +38,9 @@ export class TableComponent implements OnInit {
     }
 
   someVariable: Array<Array<string | number>> =[];
+  Tableplan : Array<TablePlan> = [];
   values: Array<string | number> = []; 
-  table = 0
+  table: number = 0;
   tables = []
   chair;
 
@@ -71,7 +78,6 @@ export class TableComponent implements OnInit {
 
   getGuests(): void {
     this.guestService.getGuests().subscribe( guests => this.guests = guests);
-    console.log(this.guests);
   }
 
   addRectangle(){
@@ -91,7 +97,14 @@ export class TableComponent implements OnInit {
 
   addTable(){
     this.tables.push(this.table);
-    this.someVariable.push([this.table,this.tableName])
+    // this.someVariable.push([this.table,this.tableName])
+
+    // this.testArray2.push(this.table,this.tableName);
+    // this.BigArray.push(this.testArray2);
+
+    this.BigArray.push([this.table,this.tableName,[]]);
+    console.log(this.BigArray);
+
     this.table++;
     this.tableName= this.someVariable[this.tableName];
   }
@@ -102,15 +115,27 @@ export class TableComponent implements OnInit {
     this.someVariable.pop();
   }
 
-  onDrop({dropData}: DropEvent<string>,item): void {
+  onDrop({dropData}: DropEvent<any>,item): void {
     alert("Table A"+item+" "+dropData.guestName)
-    this.droppedData = dropData;
-    // this.chair = this.someVariable[item][1];
-    // this.chair++;
-    // this.someVariable[item][1] = this.chair;
-    this.someVariable[item].push(dropData.guestName);
-    this.someVariable[item].push(dropData.userId);
+
+    // this.someVariable[item].push(dropData.guestName);
+    // this.someVariable[item].push(dropData.userId);
+
+    // this.testGuest.push([dropData.guestName,dropData.userId]);
+    // this.testGuest2.push([dropData.guestName,dropData.userId]);
+    // console.log(this.testGuest2[item]);
+
+    // this.testArray2.push([dropData.guestName,dropData.userId]);
+
+    this.BigArray[item][2].push([dropData.guestName,dropData.userId]);
+    console.log(this.BigArray);
+    // console.log(this.BigArray[0][2][0][0]);
+
+    // this.testGuest.push(dropData.guestName,dropData.userId);
+    // this.testArray[item].push(this.testGuest);
+
     this.removeItem(dropData, this.guests);
+    // console.log(this.testArray);
   }
 
    onDeleteDrop({dropData}: DropEvent<string>) {

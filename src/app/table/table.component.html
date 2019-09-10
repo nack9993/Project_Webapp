@@ -64,7 +64,7 @@
 	<div class="col-lg-8">
 		<div class="example-boundary">
 
-			<div class="tablePlan" *ngFor="let table of someVariable" cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])" cdkDragBoundary=".example-boundary">
+			<div class="tablePlan" *ngFor="let table of BigArray" cdkDrag mwlDroppable dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])" cdkDragBoundary=".example-boundary">
 				Table {{table[0]}}<br>
 				{{table[1]}}
 				</div>
@@ -89,22 +89,40 @@
 				<button  mdbBtn color="pink" size="m" (click)="objectModal.show()" >Add Object</button>
 				<!-- <button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button> -->
 
-		<table mdbTable striped="true">
-		  <thead>
+		<table mdbTable  class="table table-hover table-fixed " bordered="true">
+		  <thead >
 			<tr>
-			  <th scope="col">Table Name</th>
-			  <th scope="col">Table Number</th>
-			  <th scope="col">Table Name</th>
-			  <th scope="col">Guests</th>
+			  <th class="text-center">Table Name</th>
+			  <th class="text-center">Table Number</th>
+			  <th class="text-center">Table Name</th>
+			  <th class="text-center" colspan="2">Guests</th>
 			</tr>
 		  </thead>
 		  <tbody>
-			<tr mdbTableCol *ngFor="let some of someVariable">
-			<th scope="row">Table {{some[0]}} 	<button mdbBtn color="indigo" size="m" (click)="removeTable(some[0],someVariable)">Remove</button></th>
-			<td *ngFor="let so of some">{{so}}</td>
+			<tr mdbTableCol *ngFor="let some of BigArray">
+
+			<th scope="row"> <mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
+				Table {{some[0]}}
+				<button mdbBtn mdbWavesEffect color="indigo" size="m" (click)="removeTable(some[0],someVariable)">Remove</button>
+			</th>
+
+			<td *ngFor="let so of some" class="text-center">
+					{{so}}
+			</td>
+
+			<td >
+				<span *ngFor="let so of some[2]" class="text-center">
+					<p>{{so[0]}}
+					<a mdbBtn floating="true" size="lg" (click)="removeTable(some[0],someVariable)"><mdb-icon fas icon="trash-alt"></mdb-icon></a>
+					</p>
+					</span>
+			</td>
+
 			</tr>
+
 		  </tbody>
 		</table>
+
 		<button mdbBtn color="indigo" size="m" (click)="sendBroadCastTable()"  style="width: 50%;margin-left: 25%">Send</button>
 		</div>
 		</div>
