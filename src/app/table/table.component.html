@@ -103,7 +103,7 @@
 
 			<th scope="row"> <mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
 				Table {{some[0]}}
-				<button mdbBtn mdbWavesEffect color="indigo" size="m" (click)="removeTable(some[0],someVariable)">Remove</button>
+				<button mdbBtn mdbWavesEffect color="indigo" size="m" (click)="removeTable(some[0],BigArray)">Remove</button>
 			</th>
 
 			<td *ngFor="let so of some" class="text-center">
@@ -111,9 +111,9 @@
 			</td>
 
 			<td >
-				<span *ngFor="let so of some[2]" class="text-center">
+				<span *ngFor="let so of some[2]" class="text-center" >
 					<p>{{so[0]}}
-					<a mdbBtn floating="true" size="lg" (click)="removeTable(some[0],someVariable)"><mdb-icon fas icon="trash-alt"></mdb-icon></a>
+					<a mdbBtn floating="true" size="lg" (click)="removeGuestFromTable(so[0],BigArray,some[0])"><mdb-icon fas icon="trash-alt"></mdb-icon></a>
 					</p>
 					</span>
 			</td>

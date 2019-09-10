@@ -51,8 +51,8 @@ export class TableComponent implements OnInit {
   round = 0;
   rounds = [];
 
-  guests: Guest[];
-  guestsTemp: Guest[];
+  guests: Guest[]= [];
+  guestsTemp: Guest[] = [];
   droppedData: string;
   tableName: string;
   form: FormGroup;
@@ -115,7 +115,7 @@ export class TableComponent implements OnInit {
     this.someVariable.pop();
   }
 
-  onDrop({dropData}: DropEvent<any>,item): void {
+  onDrop({dropData}: DropEvent<Guest>,item): void {
     alert("Table A"+item+" "+dropData.guestName)
 
     // this.someVariable[item].push(dropData.guestName);
@@ -135,18 +135,43 @@ export class TableComponent implements OnInit {
     // this.testArray[item].push(this.testGuest);
 
     this.removeItem(dropData, this.guests);
+    this.guestsTemp.push(dropData);
+    console.log(this.guestsTemp);
     // console.log(this.testArray);
   }
 
-   onDeleteDrop({dropData}: DropEvent<string>) {
-    this.removeItem(dropData, this.tables);
-  }
+  //  onDeleteDrop({dropData}: DropEvent<any>) {
+  //   this.removeItem(dropData, this.tables);
+  //   this.guestsTemp.push(dropData);
+  // }
 
   removeItem(item: any, list: Array<any>) {
     let index = list.map(function (e) {
       return e.guestName
     }).indexOf(item.guestName);
     list.splice(index, 1);
+  }
+
+  removeGuestFromTable(item: any, list: Array<any>,some: any){
+
+    let index = list[some].map(function (e) {
+      console.log(e)
+      return e[0]
+    }).indexOf(item);
+    list[some][2].splice(index, 1);
+
+    let indexOftempGuest = this.guestsTemp.map(function (e) {
+      return e.guestName
+    }).indexOf(item);
+
+    this.guests.push(this.guestsTemp[indexOftempGuest]);
+    
+    let indexOfGuest = this.guestsTemp.map(function (e) {
+      return e.guestName
+    }).indexOf(item);
+    this.guestsTemp.splice(indexOfGuest, 1);
+
+    console.log(this.guestsTemp);
   }
 
   removeTable(item: any, list: Array<any>) {
