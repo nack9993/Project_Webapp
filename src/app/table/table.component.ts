@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-export interface TabMessage {path: string, date: string};
-// export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-// import { TablePlan } from '../TablePlan';
+import { TablePlan } from '../TablePlan';
+
+export interface TabMessage {path: string, id: string, date: string};
 
 @Component({
   selector: 'app-table',
@@ -43,7 +43,7 @@ export class TableComponent implements OnInit {
     }
 
   someVariable: Array<Array<string | number>> =[];
-  // Tableplan : Array<TablePlan> = [];
+  Tableplan : Array<TablePlan> = [];
   values: Array<string | number> = []; 
   table: number = 0;
   tables = []
@@ -130,7 +130,7 @@ export class TableComponent implements OnInit {
     // this.testArray2.push([dropData.guestName,dropData.userId]);
 
     this.BigArray[item][2].push([dropData.guestName,dropData.userId]);
-    // console.log(this.BigArray);
+    console.log(this.BigArray);
     // console.log(this.BigArray[0][2][0][0]);
 
     // this.testGuest.push(dropData.guestName,dropData.userId);
@@ -188,23 +188,26 @@ export class TableComponent implements OnInit {
     this.table--;
   }
 
-  sendBroadCastTable(someVariable){
-    // for(let table of this.someVariable){ 
+  sendBroadCastTable(BigArray){
+    for(let tables of this.BigArray){ 
+     for(let table of tables[2]){
       return this.http.post(this.Url, JSON.stringify({
-            "messages":[
-                {
-                    "type":"text",
-                    "text":this.someVariable[this.tableName]
-                },
-            ]
-        }), this.options).toPromise().then((result) => {
-          console.log(result);
-          this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-          this.itemsCollection.add({path: this.someVariable[this.tableName], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
-          alert("Broadcast message is success");
-        }).catch(err => {
-          alert('Something went wrong:'+ err.message);
-        });
-      // } 
-  }
+        "to": table[1],
+        "messages":[
+            {
+                "type":"text",
+                "text":table[0]+table[1]
+            },
+        ]
+    }), this.options).toPromise().then((result) => {
+      console.log(result);
+      this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+      this.itemsCollection.add({path: this.table[0]+this.tableName[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
+      alert("Broadcast message is success");
+    }).catch(err => {
+      alert('Something went wrong:'+ err.message);
+    });
+     }
+       }
+    }
   }

@@ -22,7 +22,12 @@ import { AdminComponent } from './admin/admin.component';
 import { DragAndDropModule } from 'angular-draggable-droppable';
 import { DatePipe } from '@angular/common';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularDraggableModule } from 'angular2-draggable';
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularDraggableModule} from 'angular2-draggable';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
