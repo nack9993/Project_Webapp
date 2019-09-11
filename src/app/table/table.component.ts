@@ -12,6 +12,8 @@ export interface TabMessage { path: string, date: string };
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TablePlan } from '../TablePlan';
 
+export interface TabMessage {path: string, id: string, date: string};
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -186,23 +188,27 @@ export class TableComponent implements OnInit {
     this.table--;
   }
 
-  sendBroadCastTable(someVariable) {
-    // for(let table of this.someVariable){ 
-    return this.http.post(this.Url, JSON.stringify({
-      "messages": [
-        {
-          "type": "text",
-          "text": this.someVariable[this.tableName]
-        },
-      ]
+  sendBroadCastTable(BigArray){
+    for(let tables of this.BigArray){ 
+     for(let table of tables[2]){
+      return this.http.post(this.Url, JSON.stringify({
+        "to": table[1],
+        "messages":[
+            {
+                "type":"text",
+                "text":table[0]+table[1]
+            },
+        ]
     }), this.options).toPromise().then((result) => {
       console.log(result);
-      this.dateTab = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
-      this.itemsCollection.add({ path: this.someVariable[this.tableName], date: this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a") })
+      this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+      this.itemsCollection.add({path: this.table[0]+this.tableName[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
-      alert('Something went wrong:' + err.message);
+      alert('Something went wrong:'+ err.message);
     });
-    // } 
+     }
+       }
+    }
   }
-}
+  }

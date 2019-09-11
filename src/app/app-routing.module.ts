@@ -5,11 +5,11 @@ import {PhotoComponent} from './photo/photo.component';
 import { GuestListComponent } from './guest-list/guest-list.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { TableComponent } from './table/table.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { WishComponent } from './wish/wish.component';
 import { AdminComponent } from './admin/admin.component';
+import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
