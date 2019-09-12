@@ -62,14 +62,11 @@ export class TableComponent implements OnInit {
   dateTab: string;
 
   Url = 'https://api.line.me/v2/bot/message/broadcast';
+  CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/WebRequest';
   headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer GsZpznR0mZamDlPUksPKYtSKq1qtWqILKEPMnZjoHAuOhc5Xsl2wX19eNAffYrNDjxT/f8By9yQVp5ym39wqNo3B/uPWBoURHkpm0MB+MN+Toi5+dE48ennz+ooOPJd7Yfp1u80un7/y/M/2r25GPwdB04t89/1O/w1cDnyilFU='
-    , "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Authorization"
-  });
-
+    // "Access-Control-Allow-Origin": "*"
+});
+  
   options = {
     headers: this.headers
   }
@@ -191,24 +188,24 @@ export class TableComponent implements OnInit {
   sendBroadCastTable(BigArray){
     for(let tables of this.BigArray){ 
      for(let table of tables[2]){
-      return this.http.post(this.Url, JSON.stringify({
+      return this.http.post(this.CloudUrl, JSON.stringify({
         "to": table[1],
         "messages":[
             {
                 "type":"text",
-                "text":table[0]+table[1]
+                "text":"Your table is "+tables[0]+" Table name : "+tables[1]
             },
         ]
-    }), this.options).toPromise().then((result) => {
+    })).toPromise().then((result) => {
       console.log(result);
       this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-      this.itemsCollection.add({path: this.table[0]+this.tableName[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
+      this.itemsCollection.add({path: table[0]+table[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
       alert('Something went wrong:'+ err.message);
-    });
+    })
      }
        }
     }
   }
-  }
+  
