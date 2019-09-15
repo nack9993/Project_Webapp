@@ -82,8 +82,13 @@ export class BroadcastComponent implements OnInit {
     this.router.navigate(['/home']);
     alert("Broadcast message is success");
   }).catch(err => {
-    alert('Something went wrong:'+ err.message);
+    if(err.status == 200){
+      alert('BroadCast message is sucess');
+      this.router.navigate(['/home']);
+    }else{
+    alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    }
   });;
   }
 
@@ -101,8 +106,13 @@ export class BroadcastComponent implements OnInit {
     alert("Broadcast picture is success");
     this.router.navigate(['/home']);
   }).catch(err => {
-    alert('Something went wrong:'+ err.message);
+    if(err.status == 200){
+      alert('BroadCast Picture is sucess');
+      this.router.navigate(['/home']);
+    }else{
+    alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    }
   });;
   }
 

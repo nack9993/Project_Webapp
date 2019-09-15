@@ -11,6 +11,7 @@ export interface TabMessage { path: string, date: string };
 // export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TablePlan } from '../TablePlan';
+import { Alert } from 'selenium-webdriver';
 
 export interface TabMessage {path: string, id: string, date: string};
 
@@ -186,6 +187,9 @@ export class TableComponent implements OnInit {
   }
 
   sendBroadCastTable(BigArray){
+    console.log(this.BigArray.length)
+    if(this.BigArray.length !== 0){
+  
     for(let tables of this.BigArray){ 
      for(let table of tables[2]){
       return this.http.post(this.CloudUrl, JSON.stringify({
@@ -202,10 +206,18 @@ export class TableComponent implements OnInit {
       this.itemsCollection.add({path: table[0]+table[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
-      alert('Something went wrong:'+ err.message);
+      if(err.status == 200){
+        alert('Broadcast table is sucess');
+      }else{
+      alert('Something went wrong:'+ JSON.stringify(err));
+      }
     })
      }
        }
     }
+    else{
+      alert("Please making a table plan first");
+    }
+  }
   }
   
