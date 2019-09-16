@@ -25,11 +25,9 @@ export class BroadcastComponent implements OnInit {
 
   image: String;
   Url = 'https://api.line.me/v2/bot/message/broadcast';  // URL to web api
- headers = new HttpHeaders({'Content-Type': 'application/json',
-    'Authorization': 'Bearer GsZpznR0mZamDlPUksPKYtSKq1qtWqILKEPMnZjoHAuOhc5Xsl2wX19eNAffYrNDjxT/f8By9yQVp5ym39wqNo3B/uPWBoURHkpm0MB+MN+Toi5+dE48ennz+ooOPJd7Yfp1u80un7/y/M/2r25GPwdB04t89/1O/w1cDnyilFU='
-  ,  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-  "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Authorization"});
+  CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/BroadCastMessage';
+
+ headers = new HttpHeaders({});
 
   options = {
     headers: this.headers
@@ -70,27 +68,32 @@ export class BroadcastComponent implements OnInit {
   }
 
   submit(message){
-    return this.http.post(this.Url, JSON.stringify({
+    return this.http.post(this.CloudUrl, JSON.stringify({
       "messages":[
           {
               "type":"text",
               "text":this.message
           }
       ]
-  }), this.options).toPromise().then((result) => {
+  })).toPromise().then((result) => {
     console.log(result);
     this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
     this.itemsCollection.add({ path: this.message , date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
     this.router.navigate(['/home']);
     alert("Broadcast message is success");
   }).catch(err => {
-    alert('Something went wrong:'+ err.message);
+    if(err.status == 200){
+      alert('BroadCast message is sucess');
+      this.router.navigate(['/home']);
+    }else{
+    alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    }
   });;
   }
 
   submitPicture(name){
-    return this.http.post(this.Url, JSON.stringify({
+    return this.http.post(this.CloudUrl, JSON.stringify({
       "messages":[
           {
               "type":"image",
@@ -98,13 +101,18 @@ export class BroadcastComponent implements OnInit {
               "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media'
           }
       ]
-  }), this.options).toPromise().then((result) => {
+  })).toPromise().then((result) => {
     console.log(JSON.stringify(result));
     alert("Broadcast picture is success");
     this.router.navigate(['/home']);
   }).catch(err => {
-    alert('Something went wrong:'+ err.message);
+    if(err.status == 200){
+      alert('BroadCast Picture is sucess');
+      this.router.navigate(['/home']);
+    }else{
+    alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    }
   });;
   }
 
