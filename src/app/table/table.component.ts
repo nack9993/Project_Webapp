@@ -202,7 +202,7 @@ export class TableComponent implements OnInit {
     }), this.options).toPromise().then((result) => {
       console.log(result);
       this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-      this.itemsCollection.add({path: this.table[0]+this.tableName[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
+      this.itemsCollection.add({path: table[0]+table[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
       alert('Something went wrong:'+ err.message);
