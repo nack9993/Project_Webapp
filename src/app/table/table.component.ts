@@ -99,51 +99,17 @@ export class TableComponent implements OnInit {
   }
 
   addTable() {
-    // this.tables.push(this.table);
-    // this.someVariable.push([this.table,this.tableName])
-
-    // this.testArray2.push(this.table,this.tableName);
-    // this.BigArray.push(this.testArray2);
-
     this.BigArray.push([this.table, this.tableName, []]);
-    // console.log(this.BigArray);
-
     this.table++;
     this.tableName = "";
   }
 
   onDrop({ dropData }: DropEvent<Guest>, item): void {
-    console.log(item);
-    console.log(this.BigArray);
-    console.log(this.BigArray[item]);
     alert("Table A" + item + " " + dropData.guestName)
-
-    // this.someVariable[item].push(dropData.guestName);
-    // this.someVariable[item].push(dropData.userId);
-
-    // this.testGuest.push([dropData.guestName,dropData.userId]);
-    // this.testGuest2.push([dropData.guestName,dropData.userId]);
-    // console.log(this.testGuest2[item]);
-
-    // this.testArray2.push([dropData.guestName,dropData.userId]);
-
     this.BigArray[item][2].push([dropData.guestName, dropData.userId]);
-    // console.log(this.BigArray);
-    // console.log(this.BigArray[0][2][0][0]);
-
-    // this.testGuest.push(dropData.guestName,dropData.userId);
-    // this.testArray[item].push(this.testGuest);
-
     this.removeItem(dropData, this.guests);
     this.guestsTemp.push(dropData);
-    // console.log(this.guestsTemp);
-    // console.log(this.testArray);
   }
-
-  //  onDeleteDrop({dropData}: DropEvent<any>) {
-  //   this.removeItem(dropData, this.tables);
-  //   this.guestsTemp.push(dropData);
-  // }
 
   removeItem(item: any, list: Array<any>) {
     let index = list.map(function (e) {
@@ -152,7 +118,6 @@ export class TableComponent implements OnInit {
     list.splice(index, 1);
   }
 
-  test: Array<Array<string>> = [["Nack"], ["Thai"]];
 
   removeGuestFromTable(item: any, list: Array<any>, some: any) {
     console.log(item);
