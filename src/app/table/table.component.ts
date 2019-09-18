@@ -12,6 +12,7 @@ export interface TabMessage { path: string, date: string };
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TablePlan } from '../TablePlan';
 import { Alert } from 'selenium-webdriver';
+import { TablePlan } from '../TablePlan';
 
 export interface TabMessage {path: string, id: string, date: string};
 
@@ -41,9 +42,9 @@ export class TableComponent implements OnInit {
 
   }
 
-  someVariable: Array<Array<string | number>> = [];
-  Tableplan: Array<TablePlan> = [];
-  values: Array<string | number> = [];
+  someVariable: Array<Array<string | number>> =[];
+  Tableplan : Array<TablePlan> = [];
+  values: Array<string | number> = []; 
   table: number = 0;
   tables = []
   chair;
@@ -127,8 +128,8 @@ export class TableComponent implements OnInit {
 
     // this.testArray2.push([dropData.guestName,dropData.userId]);
 
-    this.BigArray[item][2].push([dropData.guestName, dropData.userId]);
-    // console.log(this.BigArray);
+    this.BigArray[item][2].push([dropData.guestName,dropData.userId]);
+    console.log(this.BigArray);
     // console.log(this.BigArray[0][2][0][0]);
 
     // this.testGuest.push(dropData.guestName,dropData.userId);
@@ -187,37 +188,25 @@ export class TableComponent implements OnInit {
   }
 
   sendBroadCastTable(BigArray){
-    console.log(this.BigArray.length)
-    if(this.BigArray.length !== 0){
-  
     for(let tables of this.BigArray){ 
      for(let table of tables[2]){
-      return this.http.post(this.CloudUrl, JSON.stringify({
+      return this.http.post(this.Url, JSON.stringify({
         "to": table[1],
         "messages":[
             {
                 "type":"text",
-                "text":"Your table is "+tables[0]+" Table name : "+tables[1]
+                "text":table[0]+table[1]
             },
         ]
-    })).toPromise().then((result) => {
+    }), this.options).toPromise().then((result) => {
       console.log(result);
       this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
       this.itemsCollection.add({path: table[0]+table[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
-      if(err.status == 200){
-        alert('Broadcast table is sucess');
-      }else{
-      alert('Something went wrong:'+ JSON.stringify(err));
-      }
-    })
+      alert('Something went wrong:'+ err.message);
+    });
      }
        }
     }
-    else{
-      alert("Please making a table plan first");
-    }
   }
-  }
-  
