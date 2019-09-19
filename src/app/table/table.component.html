@@ -36,16 +36,19 @@
 			<div class="modal-header">
 				<h4 class="modal-title w-100" id="myModalLabel">Add Object</h4>
 			</div>
-			<form [formGroup]="form">
+			<form [formGroup]="Objectform">
 				<div class="modal-body">
 					<div class="md-form md-outline">
-						<button mdbBtn color="pink" (click)="addRectangle();objectModal.hide()">Rectangle</button>
-						<button mdbBtn color="pink" (click)="addSquare();objectModal.hide()">Square</button>
-						<button mdbBtn color="pink" (click)="addRound();objectModal.hide()">Round</button>
+							<div class="md-form md-outline">
+									<input mdbInput mdbValidate formControlName="objectName" type="text" [(ngModel)]="objectName"
+										class="form-control mb-4" placeholder="objectName">
+								</div>
 					</div>
 				</div>
 			</form>
 			<div class="modal-footer">
+					<button mdbBtn color="pink" (click)="addObject();objectModal.hide()" [disabled]="Objectform.invalid">Submit</button>
+
 				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
 					(click)="objectModal.hide()" mdbWavesEffect>Close</button>
 			</div>
@@ -91,64 +94,67 @@
 					</p>
 				</div>
 			</div>
+
+			<table  mdbTable class="table table-sm styleObj" bordered="true">
+					<thead class="red accent-2 white-text">
+						<tr>
+							<th class="text-center">Object</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr mdbTableCol *ngFor="let obj of objects">
+							<th scope="row">
+								<mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
+								Object "{{obj}}""
+								<button mdbBtn mdbWavesEffect color="indigo" size="m"
+									(click)="removeObject(obj,objects)">Remove</button>
+							</th>
+	
+						</tr>
+						
+	
+					</tbody>
+				</table>
 		</div>
 
 		<div class="col-lg-8">
 			<div class="example-boundary">
 
 				<div class="tablePlan" *ngFor="let table of BigArray" cdkDrag mwlDroppable
-					dragOverClass="drop-over-active" (drop)="onDrop($event,table[0])"
+					dragOverClass="drop-over-active" (drop)="onDrop($event,table[0],table[1])"
 					cdkDragBoundary=".example-boundary">
-					Table {{table[0]}}<br>
+					Table
 					{{table[1]}}
 				</div>
 
 
-				<div class="rectangle" *ngFor="let rec of rectangles" cdkDrag cdkDragBoundary=".example-boundary">
-					<br>
+				<div class="object" *ngFor="let obj of objects" cdkDrag cdkDragBoundary=".example-boundary" ngResizable>
+					{{obj}}
 				</div>
-
-				<div class="square" *ngFor="let sqe of squares" cdkDrag dragOverClass="drop-over-active"
-					cdkDragBoundary=".example-boundary">
-					<br>
-				</div>
-
-				<div class="round" *ngFor="let rou of rounds" cdkDrag dragOverClass="drop-over-active"
-					cdkDragBoundary=".example-boundary">
-					<br>
-				</div>
-
 			</div>
 
 
 			<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="margin-left: 35%;">Add</button>
 			<button mdbBtn color="pink" size="m" (click)="objectModal.show()">Add Object</button><br>
-			<!-- <button   mdbBtn color="pink" size="m" (click)="deleteTable()">Delete</button> -->
 
 			<table mdbTable class="table table-hover table-fixed " bordered="true">
 				<thead>
 					<tr>
 						<th class="text-center">Table Name</th>
-						<th class="text-center">Table Number</th>
-						<th class="text-center">Table Name</th>
-						<th class="text-center" colspan="2">Guests</th>
+						<th class="text-center">Guests</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr mdbTableCol *ngFor="let some of BigArray">
 
-						<th scope="row">
+						<th scope="row" class="text-center">
 							<mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
-							Table {{some[0]}}
+							Table {{some[1]}}
 							<button mdbBtn mdbWavesEffect color="indigo" size="m"
 								(click)="removeTable(some ,BigArray)">Remove</button>
 						</th>
 
-						<td *ngFor="let so of some" class="text-center">
-							{{so}}
-						</td>
-
-						<td>
+						<td class="text-center"> 
 							<span *ngFor="let so of some[2]" class="text-center">
 								<p>{{so[0]}}
 									<a mdbBtn floating="true" size="lg"
@@ -166,7 +172,8 @@
 			</table>
 
 			<button mdbBtn color="red" size="m" (click)="confirm.show()"
-				style="width: 50%;margin-left: 25%">Send</button>
+				style="width: 25%;margin-left: 35%">Send</button>
 		</div>
 	</div>
 </section>
+

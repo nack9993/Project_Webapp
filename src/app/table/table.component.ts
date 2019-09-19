@@ -33,6 +33,7 @@ export class TableComponent implements OnInit {
   testGuest2: Array<Array<string[]>> = [];
   BigArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
   testArray2: Array<Array<string | Array<string>> | string | number> = [];
+ 
 
   constructor(private guestService: GuestService, private http: HttpClient,
     private tab: AngularFirestore, private router: Router, private datePipe: DatePipe, private fb: FormBuilder) {
@@ -47,13 +48,11 @@ export class TableComponent implements OnInit {
   table: number = 0;
   tables = []
   chair;
-
-  rectangle = 0;
-  rectangles = [];
-  square = 0;
-  squares = [];
-  round = 0;
-  rounds = [];
+  
+  objectName: string;
+  objects = [];
+  object = 0;
+  Objectform: FormGroup;
 
   guests: Guest[] = [];
   guestsTemp: Guest[] = [];
@@ -61,6 +60,9 @@ export class TableComponent implements OnInit {
   tableName: string;
   form: FormGroup;
   dateTab: string;
+
+  width: number;
+  height: number;
 
   Url = 'https://api.line.me/v2/bot/message/broadcast';
   CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/WebRequest';
@@ -76,6 +78,10 @@ export class TableComponent implements OnInit {
       name: ['', [Validators.required]]
     })
 
+    this.Objectform = this.fb.group({
+      objectName: ['', [Validators.required]]
+    })
+
     this.getGuests();
   }
 
@@ -83,19 +89,9 @@ export class TableComponent implements OnInit {
     this.guestService.getGuests().subscribe(guests => this.guests = guests);
   }
 
-  addRectangle() {
-    this.rectangles.push(this.rectangle);
-    this.rectangle++;
-  }
-
-  addSquare() {
-    this.squares.push(this.square);
-    this.square++;
-  }
-
-  addRound() {
-    this.rounds.push(this.round);
-    this.round++;
+  addObject(){
+    this.objects.push(this.objectName);
+    this.objectName = "";
   }
 
   addTable() {
@@ -104,29 +100,37 @@ export class TableComponent implements OnInit {
     this.tableName = "";
   }
 
-  onDrop({ dropData }: DropEvent<Guest>, item): void {
-    alert("Table A" + item + " " + dropData.guestName)
+  onDrop({ dropData }: DropEvent<Guest>, item , tableName): void {
+    alert("Table " + tableName + " " + dropData.guestName)
     this.BigArray[item][2].push([dropData.guestName, dropData.userId]);
-    this.removeItem(dropData, this.guests);
+    this.removeGuest(dropData, this.guests);
     this.guestsTemp.push(dropData);
   }
 
-  removeItem(item: any, list: Array<any>) {
+  removeGuest(item: any, list: Array<any>) {
     let index = list.map(function (e) {
       return e.guestName
     }).indexOf(item.guestName);
     list.splice(index, 1);
   }
 
-
-  removeGuestFromTable(item: any, list: Array<any>, some: any) {
+  removeObject(item: any, list: Array<any>) {
     console.log(item);
-    list[some][2].splice(list[some][2].indexOf(item), 1);
+    let index = list.map(function (e) {
+      return e
+    }).indexOf(item);
+    list.splice(index, 1);
+  }
+
+
+  removeGuestFromTable(guest: any, list: Array<any>, indexOfTable: any) {
+    console.log(indexOfTable);
+    list[indexOfTable][2].splice(list[indexOfTable][2].indexOf(guest), 1);
     console.log(this.guestsTemp);
 
     let indexOftempGuest = this.guestsTemp.map(function (e) {
       return e.guestName
-    }).indexOf(item[0]);
+    }).indexOf(guest[0]);
 
     console.log(indexOftempGuest);
     this.guests.push(this.guestsTemp[indexOftempGuest]);
@@ -162,7 +166,7 @@ export class TableComponent implements OnInit {
         "messages":[
             {
                 "type":"text",
-                "text":"Your table is "+tables[0]+" Table name : "+tables[1]
+                "text":"You Table name is : "+tables[1]
             },
         ]
     })).toPromise().then((result) => {
