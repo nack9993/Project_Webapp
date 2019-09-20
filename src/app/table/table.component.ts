@@ -7,15 +7,14 @@ import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-export interface TabMessage { path: string, date: string };
-// export interface TabMessage { userId: string, tableName: string, guestName: string, chairNum: string}
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TablePlan } from '../TablePlan';
 import { Alert } from 'selenium-webdriver';
-import { TablePlan } from '../TablePlan';
+import html2canvas from 'html2canvas';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 export interface TabMessage {path: string, id: string, date: string};
-
+export interface BigArray {path: string[], date: string}
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -27,7 +26,11 @@ export class TableComponent implements OnInit {
 
   message: string;
   private itemsCollection: AngularFirestoreCollection<TabMessage>;
+  private BigCollection: AngularFirestoreCollection<BigArray>;
+  private PhotoCollection: AngularFirestoreCollection<TabMessage>;
   tabMessage: Observable<TabMessage[]>;
+  tabPhoto: Observable<TabMessage[]>;
+  bigArray: Observable<BigArray[]>;
   userId: string;
 
   testGuest: Array<Array<string>> = [];
@@ -36,9 +39,14 @@ export class TableComponent implements OnInit {
   testArray2: Array<Array<string | Array<string>> | string | number> = [];
 
   constructor(private guestService: GuestService, private http: HttpClient,
-    private tab: AngularFirestore, private router: Router, private datePipe: DatePipe, private fb: FormBuilder) {
-    this.itemsCollection = this.tab.collection<TabMessage>('TableMessage');
+    private afs: AngularFirestore, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
+    private storage: AngularFireStorage) {
+    this.itemsCollection = this.afs.collection<TabMessage>('TableMessage');
     this.tabMessage = this.itemsCollection.valueChanges();
+    this.PhotoCollection = this.afs.collection<TabMessage>('TablePhoto');
+    this.tabPhoto = this.PhotoCollection.valueChanges();
+    this.BigCollection = this.afs.collection<BigArray>('NumTable');
+    this.bigArray = this.BigCollection.valueChanges();
 
   }
 
@@ -62,6 +70,9 @@ export class TableComponent implements OnInit {
   tableName: string;
   form: FormGroup;
   dateTab: string;
+  name: string;
+  downloadURL: Observable<any>;
+  url: Observable<string []>;
 
   Url = 'https://api.line.me/v2/bot/message/broadcast';
   CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/WebRequest';
@@ -155,23 +166,71 @@ export class TableComponent implements OnInit {
   sendBroadCastTable(BigArray){
     for(let tables of this.BigArray){ 
      for(let table of tables[2]){
-      return this.http.post(this.Url, JSON.stringify({
+      return this.http.post(this.CloudUrl, JSON.stringify({
         "to": table[1],
         "messages":[
             {
                 "type":"text",
-                "text":table[0]+table[1]
+                "text":"Your table is "+tables[0]+" Table name : "+tables[1]
             },
         ]
-    }), this.options).toPromise().then((result) => {
+      })).toPromise().then((result) => {
       console.log(result);
-      this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-      this.itemsCollection.add({path: table[0]+table[1], id: this.userId, date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       alert("Broadcast message is success");
     }).catch(err => {
-      alert('Something went wrong:'+ err.message);
+      if(err.status == 200){
+        alert('Broadcast table is sucess');
+        this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+        this.itemsCollection.add({path: "Table name : "+tables[1], id: table[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+        // this.BigCollection.add({path: BigArray, date:this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+        console.log(this.itemsCollection);
+        // console.log(this.BigCollection);
+      }else{
+      alert('Something went wrong:'+ JSON.stringify(err));
+      }
     });
      }
        }
     }
+
+    screenshot(){
+      html2canvas(document.getElementById('container')).then(canvas=> {
+        document.body.appendChild(canvas);
+        // console.log(html2canvas);
+
+        // Get base64URL
+        var base64URL = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'); 
+        console.log(base64URL);
+
+        // this.name = Math.random().toString(36).substring(2);
+        const ref = this.storage.ref(base64URL);
+        this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
+        console.log(this.downloadURL);
+        //this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/"+this.name+"?alt=media", id: this.tables[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+      });
+    }
+    getDownloadUrl(file){
+      this.url = this.storage.ref(file).getDownloadURL();
+     return this.storage.ref(file).getDownloadURL();
+    }
+   
+
+    //capture all of screen
+    // screenshot(){
+    //   html2canvas(document.body).then(function(canvas) {
+    //   document.body.appendChild(canvas);
+
+    //     var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
+    //     console.log(base64URL);
+    //  });
+    // }
+    
+    // screenshot(){
+    //   html2canvas(document.getElementById('container')).then(function(canvas) {
+    //     document.getElementById("image").src= canvas.toDataURL();
+
+    //     var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
+    //     console.log(base64URL);
+    //    });
+    // }
   }
