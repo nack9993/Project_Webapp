@@ -12,6 +12,7 @@ import { TablePlan } from '../TablePlan';
 import { Alert } from 'selenium-webdriver';
 import html2canvas from 'html2canvas';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface TabMessage {path: string, id: string, date: string};
 export interface BigArray {path: string[], date: string}
@@ -38,7 +39,7 @@ export class TableComponent implements OnInit {
 
   constructor(private guestService: GuestService, private http: HttpClient,
     private afs: AngularFirestore, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
-    private storage: AngularFireStorage) {
+    private storage: AngularFireStorage,private sanitizer:DomSanitizer) {
     this.itemsCollection = this.afs.collection<TabMessage>('TableMessage');
     this.tabMessage = this.itemsCollection.valueChanges();
     this.PhotoCollection = this.afs.collection<TabMessage>('TablePhoto');
@@ -189,23 +190,23 @@ export class TableComponent implements OnInit {
      }
        }
     }
-
+  }
+  
     screenshot(){
       html2canvas(document.getElementById('container')).then(canvas=> {
         document.body.appendChild(canvas);
-        // console.log(html2canvas);
-
-        // Get base64URL
-        var base64URL = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'); 
-        console.log(base64URL);
-
-        // this.name = Math.random().toString(36).substring(2);
-        const ref = this.storage.ref(base64URL);
-        this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
-        console.log(this.downloadURL);
-        //this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/"+this.name+"?alt=media", id: this.tables[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+        var base64URL = canvas.toDataURL('image/jpeg'); 
+        console.log(this.transform(base64URL));
+        // const ref = this.storage.ref(base64URL);
+        // this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
       });
     }
+
+    transform(base64Image){
+      return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + base64Image);
+  }
+
+  
     getDownloadUrl(file){
       this.url = this.storage.ref(file).getDownloadURL();
      return this.storage.ref(file).getDownloadURL();
