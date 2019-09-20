@@ -191,6 +191,7 @@ export class TableComponent implements OnInit {
        }
     }
   }
+<<<<<<< Updated upstream
   
     screenshot(){
       html2canvas(document.getElementById('container')).then(canvas=> {
@@ -207,28 +208,28 @@ export class TableComponent implements OnInit {
   }
 
   
+=======
+
+    screenshot(){
+      html2canvas(document.getElementById('container')).then(canvas=> {
+        document.body.appendChild(canvas);
+        // console.log(html2canvas);
+
+        // Get base64URL
+        var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
+        console.log(base64URL);
+
+        // this.name = Math.random().toString(36).substring(2);
+        const ref = this.storage.ref(base64URL);
+        this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
+        console.log(this.downloadURL);
+      });
+    }
+
+>>>>>>> Stashed changes
     getDownloadUrl(file){
       this.url = this.storage.ref(file).getDownloadURL();
      return this.storage.ref(file).getDownloadURL();
     }
    
-
-    //capture all of screen
-    // screenshot(){
-    //   html2canvas(document.body).then(function(canvas) {
-    //   document.body.appendChild(canvas);
-
-    //     var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
-    //     console.log(base64URL);
-    //  });
-    // }
-    
-    // screenshot(){
-    //   html2canvas(document.getElementById('container')).then(function(canvas) {
-    //     document.getElementById("image").src= canvas.toDataURL();
-
-    //     var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
-    //     console.log(base64URL);
-    //    });
-    // }
   }

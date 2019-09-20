@@ -2,7 +2,7 @@
 <head>
 		<script type="text/javascript" src="html2canvas-master/dist/html2canvas.js"></script>
 	</head>
-	<!-- <div class="container" id='container' > -->
+	
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -83,7 +83,11 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< Updated upstream
 </div>
+=======
+</div>				
+>>>>>>> Stashed changes
 
 <section class="my-5">
 	<div class="row">
@@ -131,14 +135,18 @@
 					Table
 					{{table[1]}}
 				</div>
-
-
 				<div class="object" *ngFor="let obj of objects" cdkDrag cdkDragBoundary=".example-boundary" ngResizable>
 					{{obj}}
 				</div>
 
 		</div>
 		</div>
+<<<<<<< Updated upstream
+=======
+			</div>
+			<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="margin-left: 35%;">Add</button>
+			<button mdbBtn color="pink" size="m" (click)="objectModal.show()">Add Object</button><br>
+>>>>>>> Stashed changes
 
 			<table mdbTable class="table table-hover table-fixed " bordered="true" style="margin-top : 3%">
 				<thead>
@@ -180,5 +188,5 @@
 		<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="width: 50%">Add</button><br>
 		<button mdbBtn color="pink" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
 		</div>
-	</div>
+	
 </section>
