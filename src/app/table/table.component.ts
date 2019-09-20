@@ -29,10 +29,7 @@ export class TableComponent implements OnInit {
   tabMessage: Observable<TabMessage[]>;
   userId: string;
 
-  testGuest: Array<Array<string>> = [];
-  testGuest2: Array<Array<string[]>> = [];
   BigArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
-  testArray2: Array<Array<string | Array<string>> | string | number> = [];
  
 
   constructor(private guestService: GuestService, private http: HttpClient,
@@ -42,12 +39,7 @@ export class TableComponent implements OnInit {
 
   }
 
-  someVariable: Array<Array<string | number>> = [];
-  Tableplan: Array<TablePlan> = [];
-  values: Array<string | number> = [];
   table: number = 0;
-  tables = []
-  chair;
   
   objectName: string;
   objects = [];
@@ -155,10 +147,9 @@ export class TableComponent implements OnInit {
     this.table--;
   }
 
-  sendBroadCastTable(BigArray){
+  sendBroadCastTable(){
     console.log(this.BigArray.length)
     if(this.BigArray.length !== 0){
-  
     for(let tables of this.BigArray){ 
      for(let table of tables[2]){
       return this.http.post(this.CloudUrl, JSON.stringify({
@@ -176,7 +167,10 @@ export class TableComponent implements OnInit {
       alert("Broadcast message is success");
     }).catch(err => {
       if(err.status == 200){
-        alert('Broadcast table is sucess');
+        alert('Broadcast table is success');
+        console.log(table[0]);
+        this.dateTab = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+        this.itemsCollection.add({path: table[0]+table[1], id: table[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")})
       }else{
       alert('Something went wrong:'+ JSON.stringify(err));
       }
