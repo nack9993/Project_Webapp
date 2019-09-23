@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<section class="my-5">
+<section class="my-5 " >
 	<div class="row">
 		<div class="col-sm-3" style="padding-left: 5%">
 			<p >Guest List</p>
@@ -121,10 +121,9 @@
 				</table>
 		</div>
 		
-		
-		<div class="col-sm-6">
-			<div class="container" id='container'>
-			<div class="example-boundary" >
+		<div class="col-sm-6" >
+			<div class="container"  #screen >
+			<div class="example-boundary">
 				<div class="tablePlan" *ngFor="let table of BigArray" cdkDrag mwlDroppable
 					dragOverClass="drop-over-active" (drop)="onDrop($event,table[0],table[1])"
 					cdkDragBoundary=".example-boundary" ngResizable>
@@ -171,14 +170,21 @@
 					</tr>
 				</tbody>
 			</table>
-		<div class="container text-center">
+		<!-- <div class="container text-center">
 			<button mdbBtn color="red" size="m" (click)="confirm.show()" rounded="true" outline="true">Send</button>
 				<button mdbBtn color="pink" size="m" (click)="screenshot()" rounded="true" outline="true">Take screenshot</button>
-				</div>
+				</div> -->
 		</div>
-		<div class="col-sm-3">
+		<div class="col-sm-3 text-center">
 		<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="width: 50%">Add</button><br>
 		<button mdbBtn color="pink" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
+	    <button mdbBtn color="red" size="m" (click)="confirm.show()" rounded="true" outline="true"  style="width: 70%">Send</button>
 		</div>
 	</div>
+	
+	<div id="download">
+		<img #canvas>
+		<a #downloadLink></a>
+	  </div>
+
 </section>
