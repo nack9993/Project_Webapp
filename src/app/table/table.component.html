@@ -83,11 +83,7 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< Updated upstream
-</div>
-=======
 </div>				
->>>>>>> Stashed changes
 
 <section class="my-5">
 	<div class="row">
@@ -128,6 +124,7 @@
 		
 		<div class="col-sm-6">
 			<div class="container" id='container'>
+					<button mdbBtn color="pink" size="m" (click)="screenshot()" rounded="true" outline="true">Take screenshot</button>
 			<div class="example-boundary" >
 				<div class="tablePlan" *ngFor="let table of BigArray" cdkDrag mwlDroppable
 					dragOverClass="drop-over-active" (drop)="onDrop($event,table[0],table[1])"
@@ -141,12 +138,10 @@
 
 		</div>
 		</div>
-<<<<<<< Updated upstream
-=======
+
 			</div>
 			<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="margin-left: 35%;">Add</button>
 			<button mdbBtn color="pink" size="m" (click)="objectModal.show()">Add Object</button><br>
->>>>>>> Stashed changes
 
 			<table mdbTable class="table table-hover table-fixed " bordered="true" style="margin-top : 3%">
 				<thead>
@@ -181,12 +176,12 @@
 			</table>
 		<div class="container text-center">
 			<button mdbBtn color="red" size="m" (click)="confirm.show()" rounded="true" outline="true">Send</button>
-				<button mdbBtn color="pink" size="m" (click)="screenshot()" rounded="true" outline="true">Take screenshot</button>
+				<!-- <button mdbBtn color="pink" size="m" (click)="screenshot()" rounded="true" outline="true">Take screenshot</button> -->
 				</div>
 		</div>
-		<div class="col-sm-3">
+		<!-- <div class="col-sm-3">
 		<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="width: 50%">Add</button><br>
 		<button mdbBtn color="pink" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
-		</div>
+		</div> -->
 	
 </section>

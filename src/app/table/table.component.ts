@@ -191,45 +191,41 @@ export class TableComponent implements OnInit {
        }
     }
   }
-<<<<<<< Updated upstream
   
-    screenshot(){
+    screenshot(canvas, callback){
       html2canvas(document.getElementById('container')).then(canvas=> {
         document.body.appendChild(canvas);
-        var base64URL = canvas.toDataURL('image/jpeg'); 
-        console.log(this.transform(base64URL));
+        console.log(canvas);
+        
+        var image = new Image();
+      image.onload = function(){
+        callback(image);
+      }
+      image.src = canvas.toDataURL("image/่jpg");
+      console.log(image.src);
+        // var base64URL = canvas.toDataURL('image/png'); 
+        // console.log(this.transform(base64URL));
         // const ref = this.storage.ref(base64URL);
         // this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
       });
     }
 
-    transform(base64Image){
-      return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + base64Image);
-  }
 
-  
-=======
+  //   transform(base64Image){
+  //     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + base64Image);
+  // }
 
-    screenshot(){
-      html2canvas(document.getElementById('container')).then(canvas=> {
-        document.body.appendChild(canvas);
-        // console.log(html2canvas);
-
-        // Get base64URL
-        var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream'); 
-        console.log(base64URL);
-
-        // this.name = Math.random().toString(36).substring(2);
-        const ref = this.storage.ref(base64URL);
-        this.downloadURL = this.storage.ref(base64URL).getDownloadURL();
-        console.log(this.downloadURL);
-      });
-    }
-
->>>>>>> Stashed changes
     getDownloadUrl(file){
       this.url = this.storage.ref(file).getDownloadURL();
      return this.storage.ref(file).getDownloadURL();
     }
    
+    convertCanvasToImage(canvas, callback) {
+      // var image = new Image();
+      // image.onload = function(){
+      //   callback(image);
+      // }
+      // image.src = canvas.toDataURL("image/่jpg");
+      // console.log(image.src);
+    }
   }
