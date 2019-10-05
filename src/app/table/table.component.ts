@@ -25,43 +25,10 @@ export interface BigArray { path: string[], date: string }
 
 
 export class TableComponent implements OnInit {
-  @ViewChild('screen') screen: ElementRef;
-  @ViewChild('canvas') canvas: ElementRef;
-  @ViewChild('downloadLink') downloadLink: ElementRef;
+  @ViewChild('screen', {static: false}) screen: ElementRef;
+  @ViewChild('canvas', {static: false}) canvas: ElementRef;
+  @ViewChild('downloadLink', {static: false}) downloadLink: ElementRef;
 
-  screenshot() {
-    html2canvas(this.screen.nativeElement).then(canvas => {
-      this.canvas.nativeElement.src = canvas.toDataURL();
-      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-
-      canvas.toBlob((blob => {
-        const ref = this.storage.ref("Test");
-        this.task = ref.put(blob);
-        return this.http.post(this.BroadcastPictureUrl, JSON.stringify({
-          "messages":[
-            {
-                "type":"image",
-                "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media',
-                "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media'
-            }
-        ]
-        })).toPromise().then((result) => {
-          console.log(result);
-          alert("Broadcast message is success");
-        }).catch(err => {
-          if (err.status == 200) {
-            alert('Table Plan is successfully');
-          } else {
-            alert('Something went wrong:' + JSON.stringify(err));
-          }
-        });
-      }));
-
-      // this.downloadLink.nativeElement.download = 'marble-diagram.png';
-      // this.downloadLink.nativeElement.click();
-
-    });
-  }
   task: AngularFireUploadTask;
   message: string;
   private itemsCollection: AngularFirestoreCollection<TabMessage>;
@@ -72,7 +39,7 @@ export class TableComponent implements OnInit {
   bigArray: Observable<BigArray[]>;
   userId: string;
 
-  BigArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
+  TableArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
 
 
   constructor(private guestService: GuestService, private http: HttpClient,
@@ -107,7 +74,7 @@ export class TableComponent implements OnInit {
   name: string;
   downloadURL: Observable<any>;
   url: Observable<string[]>;
-
+  checkTableNameBoolean: boolean =true;
   width: number;
   height: number;
 
@@ -141,18 +108,40 @@ export class TableComponent implements OnInit {
 
   addObject() {
     this.objects.push(this.objectName);
+    console.log(this.objects)
     this.objectName = "";
   }
 
-  addTable() {
-    this.BigArray.push([this.table, this.tableName, []]);
+  addTable(indexTable, tableName) {
+    this.checkTableNameBoolean = true;
+    if(this.TableArray.length != 0){
+      this.checkTableName(this.tableName);
+      if(this.checkTableNameBoolean == true){
+        this.TableArray.push([this.table, this.tableName, []]);
+      this.table++;
+      this.tableName = "";
+      }else{
+        alert("This table name is already used");
+        this.tableName = "";
+      }
+    }else{
+    this.TableArray.push([this.table, this.tableName, []]);
     this.table++;
     this.tableName = "";
+    }
+  }
+
+  checkTableName(tableName){
+    for(var table of this.TableArray){
+      if(tableName == table[1]){
+        this.checkTableNameBoolean = false;
+      }
+      }
   }
 
   onDrop({ dropData }: DropEvent<Guest>, item, tableName): void {
     alert("Table " + tableName + " " + dropData.guestName)
-    this.BigArray[item][2].push([dropData.guestName, dropData.userId]);
+    this.TableArray[item][2].push([dropData.guestName, dropData.userId]);
     this.removeGuest(dropData, this.guests);
     this.guestsTemp.push(dropData);
   }
@@ -206,21 +195,27 @@ export class TableComponent implements OnInit {
     this.table--;
   }
 
+  
    delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
   async  sendBroadCastTable() {
-    this.screenshot();
-    console.log(this.BigArray.length)
-    if (this.BigArray.length !== 0) {
-      for (let tables of this.BigArray) {
-        for (let table of tables[2]) {
-         this.sendPushMessageForEachGuest(table,tables);
+    console.log(this.TableArray);
+    if(this.TableArray.length != 0 ){
+      this.screenshot();
+      console.log(this.TableArray.length)
+      if (this.TableArray.length !== 0) {
+        for (let tables of this.TableArray) {
+          for (let table of tables[2]) {
+           this.sendPushMessageForEachGuest(table,tables);
+          }
+          await this.delay(3000);
         }
-        await this.delay(3000);
+        alert('Broadcast table is sucess');
       }
-      alert('Broadcast table is sucess');
+    }else{
+      alert("Please making a table plan first")
     }
   }
 
@@ -245,5 +240,35 @@ export class TableComponent implements OnInit {
           });
   }
 
+  //รวม 2 ตัวนี้ได้
 
+  screenshot() {
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+
+      canvas.toBlob((blob => {
+        const ref = this.storage.ref("Test");
+        this.task = ref.put(blob);
+        return this.http.post(this.BroadcastPictureUrl, JSON.stringify({
+          "messages":[
+            {
+                "type":"image",
+                "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media',
+                "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media'
+            }
+        ]
+        })).toPromise().then((result) => {
+          console.log(result);
+          alert("Broadcast message is success");
+        }).catch(err => {
+          if (err.status == 200) {
+            alert('Table Plan is successfully');
+          } else {
+            alert('Something went wrong:' + JSON.stringify(err));
+          }
+        });
+      }));
+    });
+  }
 }

@@ -10,12 +10,9 @@
                     <textarea [(ngModel)]="message" type="text" id="form75" class="form-control md-textarea" rows="3" mdbInput required></textarea>
                     <label for="form75">Message</label>
                   </div>
-              
-                      <div class="row justify-content-center">
-                          <button class="btn " (click)="submit()" style="margin-top: 5%; width: 100%;color: black">Submit</button>
-                      </div>
           </div>
           <div class="modal-footer">
+                  <button class="btn " (click)="submit()">Submit</button>
             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
           </div>
         </div>
@@ -31,7 +28,6 @@
           </div>
           <div class="modal-body">
               <div class="row justify-content-center">
-                  <p>Upload Image</p>
                   <div class="container" *ngIf="downloadURL | async; let url">
                     <img [src]="url" alt="Image from AngularFireStorage">
                   </div>
@@ -44,12 +40,10 @@
               
                 <button (click)="fileInput.click()">Select File</button>
               </div>
-                      <div class="row justify-content-center">
-                          <button class="btn" (click)="submitPicture(randomId)" type="submit" style="margin-top: 5%; width: 100%;color: black" [disabled]="!uploadStatus == true">Submit</button>
-                      </div>
 
           </div>
           <div class="modal-footer">
+              <button class="btn" (click)="submitPicture(randomId)" type="submit" [disabled]="!uploadStatus == true">Submit</button>
             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="picture.hide()" mdbWavesEffect>Close</button>
           </div>
         </div>
@@ -60,35 +54,29 @@
 <div class="container animated fadeIn"  style="width: 60%">
   <div class="form">
       <p class="h4 mb-4"> Select type of message</p>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Message</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
+        <button type="button" mdbBtn gradient="peach" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Message</button>
+        <button type="button" mdbBtn gradient="peach" class="relative waves-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
   </div>
-  </div>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-  <!-- <h2>History Table</h2> -->
-<div class="container">
-  <table mdbTable striped="true"  mdbTableScroll scrollY="true" maxHeight="500" >
-  <!-- <table class="table table-bordered table-striped mb-0"> -->
+
+  <table class="table table-sm text-center justify-content-center" mdbTable striped="true"  style="margin-top: 50px;">
     <thead class="rgba-red-strong">
       <tr>
-        <th scope="col"><h5></h5></th>
-        <th scope="col"><h5>Broadcast</h5></th>
-        <th scope="col"><h5>Date and time</h5></th>
+        <th scope="col">Broadcast</th>
+        <th scope="col">Date and time</th>
       </tr>
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let item of items | async">
-        <th scope="row"> </th>
         <img class="d-block w-1 h-1" [src]='item.path'>
         <td>{{item.date}}</td>
       </tr>
       <tr mdbTableCol *ngFor="let messageDB of messageDBs | async">
-        <th scope="row"> </th>
         <td>{{messageDB.path}}</td>
         <td>{{messageDB.date}}</td>
       </tr>
     </tbody>
   </table>
-  </div>
+
+</div>
 
