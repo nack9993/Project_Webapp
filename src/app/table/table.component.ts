@@ -219,28 +219,10 @@ export class TableComponent implements OnInit {
     }
   }
 
-  sendPushMessageForEachGuest(table,tables){
-   return this.http.post(this.CloudUrl, JSON.stringify({
-            "to": table[1],
-            "messages": [
-              {
-                "type": "text",
-                "text": "You Table name is : " + tables[1]
-              },
-            ]
-          })).toPromise().then((result) => {
-            console.log(result);
-            console.log("Broadcast message is success");
-          }).catch(err => {
-            if (err.status == 200) {
-              console.log('Broadcast table is sucess');
-            } else {
-              console.log('Something went wrong:' + JSON.stringify(err));
-            }
-          });
+    transform(base64Image){
+      return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + base64Image);
   }
 
-  //รวม 2 ตัวนี้ได้
 
   screenshot() {
     html2canvas(this.screen.nativeElement).then(canvas => {
