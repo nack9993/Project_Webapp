@@ -13,6 +13,7 @@ import { Alert } from 'selenium-webdriver';
 import html2canvas from 'html2canvas';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 export interface TabMessage { path: string, id: string, date: string };
 export interface BigArray { path: string[], date: string }
@@ -44,7 +45,7 @@ export class TableComponent implements OnInit {
 
   constructor(private guestService: GuestService, private http: HttpClient,
     private afs: AngularFirestore, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
-    private storage: AngularFireStorage, private sanitizer: DomSanitizer) {
+    private storage: AngularFireStorage, private sanitizer: DomSanitizer,private db: AngularFireDatabase) {
     this.itemsCollection = this.afs.collection<TabMessage>('TableMessage');
     this.tabMessage = this.itemsCollection.valueChanges();
     this.PhotoCollection = this.afs.collection<TabMessage>('TablePhoto');
@@ -65,7 +66,7 @@ export class TableComponent implements OnInit {
   object = 0;
   Objectform: FormGroup;
 
-  guests: Guest[] = [];
+  guests: any[] = [];
   guestsTemp: Guest[] = [];
   droppedData: string;
   tableName: string;
@@ -103,7 +104,11 @@ export class TableComponent implements OnInit {
   }
 
   getGuests(): void {
-    this.guestService.getGuests().subscribe(guests => this.guests = guests);
+    this.db.list('/guests').valueChanges()   // returns observable
+    .subscribe(list=> {
+    this.guests = list;
+    console.log(this.guests);
+    })
   }
 
   addObject() {

@@ -99,19 +99,18 @@
 				</div>
 			</div>
 
-			<table  mdbTable class="table table-sm styleObj" bordered="true">
+			<table  mdbTable class="table table-sm styleObj" bordered="true" >
 					<thead class="red accent-2 white-text">
 						<tr>
 							<th class="text-center">Object</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr mdbTableCol *ngFor="let obj of objects">
+						<tr mdbTableCol *ngFor="let obj of objects" class="text-center">
 							<th scope="row" style=" font-size: 70%;">
 								<mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
 								Object "{{obj}}""
-								<button mdbBtn mdbWavesEffect gradient="peach" size="sm"
-									(click)="removeObject(obj,objects)">Remove</button>
+									<mdb-icon (click)="removeObject(obj,objects)" fas icon="trash-alt" size="2x" class="red-text pr-3"></mdb-icon>
 							</th>
 	
 						</tr>
@@ -151,8 +150,7 @@
 
 						<th scope="row" class="text-center">
 							Table {{some[1]}}
-							<button mdbBtn mdbWavesEffect color="indigo" size="m"
-								(click)="removeTable(some ,TableArray)">Remove</button>
+							<mdb-icon (click)="removeTable(some ,TableArray)" fas icon="trash-alt" size="1x" class="red-text pr-3"></mdb-icon>
 						</th>
 
 						<td class="text-center"> 

@@ -7,10 +7,10 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyBDJsh7ytFIbU_gdc7tnvZUUxvdbfcpXS0",
-    authDomain: "line-bot-a451a.firebaseapp.com",
-    databaseURL: "https://line-bot-a451a.firebaseio.com",
-    projectId: "line-bot-a451a",
-    storageBucket: "line-bot-a451a.appspot.com",
+    authDomain: "marry-marrige.firebaseapp.com",
+    databaseURL: "https://marry-marrige.firebaseio.com",
+    projectId: "marry-marrige",
+    storageBucket: "marry-marrige.appspot.com",
     messagingSenderId: "380248008792",
     appId: "1:380248008792:web:511d0ffd25fc30d5"
   },

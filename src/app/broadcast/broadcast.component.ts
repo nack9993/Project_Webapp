@@ -25,7 +25,7 @@ export class BroadcastComponent implements OnInit {
 
   image: String;
   Url = 'https://api.line.me/v2/bot/message/broadcast';  // URL to web api
-  CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/BroadCastMessage';
+  CloudUrl = 'https://us-central1-marry-marrige.cloudfunctions.net/BroadCastMessage';
 
  headers = new HttpHeaders({});
 
@@ -63,7 +63,7 @@ export class BroadcastComponent implements OnInit {
     setTimeout( () => {
       this.downloadURL = this.storage.ref(this.name).getDownloadURL();
       this.uploadStatus = true;
-     this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+     this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
   }, 3000);
   }
 
@@ -97,8 +97,8 @@ export class BroadcastComponent implements OnInit {
       "messages":[
           {
               "type":"image",
-              "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media',
-              "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/'+this.name+'?alt=media'
+              "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/'+this.name+'?alt=media',
+              "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/'+this.name+'?alt=media'
           }
       ]
   })).toPromise().then((result) => {
