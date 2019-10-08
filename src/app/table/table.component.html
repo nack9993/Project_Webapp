@@ -45,7 +45,7 @@
 					<div class="md-form md-outline">
 							<div class="md-form md-outline">
 									<input mdbInput mdbValidate formControlName="objectName" type="text" [(ngModel)]="objectName"
-										class="form-control mb-4" placeholder="objectName">
+										class="form-control mb-4" placeholder="Object Name">
 								</div>
 					</div>
 				</div>
@@ -87,20 +87,20 @@
 
 <section class="my-5 " >
 	<div class="row">
-		<div class="col-sm-3" style="padding-left: 5% ;">
+		<div class="col-sm-3 text-center" style="padding-left: 5%;">
 			<p >Guest List</p>
 			<div cdkDropList class="example-list z-depth-1">
 				<div class="example-box" *ngFor="let guest of guests" mwlDraggable dragActiveClass="drag-active"
 					[dropData]=guest cdkDragBoundary=".example-boundary">
-					<p >
-						<mdb-icon fas icon="male" size="3x" class="red-text pr-2 ml-3" aria-hidden="true"></mdb-icon>
+					<p class="text-center">
+						<mdb-icon fas icon="male" size="2x" class="red-text pr-2 ml-2" aria-hidden="true"></mdb-icon>
 						{{guest.guestName}} {{guest.guestType}}
 					</p>
 				</div>
 			</div>
 
 			<table  mdbTable class="table table-sm styleObj" bordered="true" >
-					<thead class="red accent-2 white-text">
+					<thead class="rgba-red-strong white-text">
 						<tr>
 							<th class="text-center">Object</th>
 						</tr>
@@ -110,7 +110,12 @@
 							<th scope="row" style=" font-size: 70%;">
 								<mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
 								Object "{{obj}}""
-									<mdb-icon (click)="removeObject(obj,objects)" fas icon="trash-alt" size="2x" class="red-text pr-3"></mdb-icon>
+
+								<a mdbBtn floating="true" size="s"
+								(click)="removeObject(obj,objects)">
+										<mdb-icon  fas icon="trash-alt" size="m" class="red-text pr-3"></mdb-icon>
+									</a>
+
 							</th>
 	
 						</tr>
@@ -139,7 +144,7 @@
 		</div>
 
 			<table mdbTable class="table table-sm" bordered="true" style="margin-top : 3%">
-				<thead>
+				<thead class="rgba-red-strong white-text">
 					<tr>
 						<th class="text-center">Table Name</th>
 						<th class="text-center">Guests</th>
@@ -156,9 +161,9 @@
 						<td class="text-center"> 
 							<span *ngFor="let so of some[2]" class="text-center">
 								<p>{{so[0]}}
-									<a mdbBtn floating="true" size="lg"
+									<a mdbBtn floating="true" size="s"
 										(click)="removeGuestFromTable(so,TableArray,some[0])">
-										<mdb-icon fas icon="trash-alt"></mdb-icon>
+										<mdb-icon fas icon="trash-alt" class="red-text"></mdb-icon>
 									</a>
 								</p>
 							</span>
@@ -173,9 +178,9 @@
 				</div> -->
 		</div>
 		<div class="col-sm-3 text-center">
-		<button mdbBtn color="pink" size="m" (click)="basicModal.show()" style="width: 50%">Add Table</button><br>
-		<button mdbBtn color="pink" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
-	    <button mdbBtn color="red" size="m" (click)="confirm.show()" rounded="true" outline="true"  style="width: 50%">Send</button>
+		<button mdbBtn class="rgba-red-strong" size="m" (click)="basicModal.show()" style="width: 50%">Add Table</button><br>
+		<button mdbBtn class="rgba-red-strong" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
+	    <button mdbBtn class="red" size="lg" (click)="confirm.show()" style="width: 50%">Send</button>
 		</div>
 	</div>
 	

@@ -4,16 +4,18 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Item } from '../photo/photo.component';
 import { DatePipe } from '@angular/common';
 export interface History { path: string , date : string; }
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-broadcast',
   templateUrl: './broadcast.component.html',
   styleUrls: ['./broadcast.component.scss']
 })
 export class BroadcastComponent implements OnInit {
-  
+  form: FormGroup;
+
   uploadStatus : boolean = false;
   message : string;
   @Input() file: File;
@@ -44,7 +46,7 @@ export class BroadcastComponent implements OnInit {
 
   
   constructor(private datePipe: DatePipe,private http:HttpClient,private storage: AngularFireStorage, 
-    private router: Router,private afs: AngularFirestore) {
+    private router: Router,private afs: AngularFirestore,private fb: FormBuilder) {
     this.PhotoCollection = this.afs.collection<History>('BroadcastPhoto');
      this.items = this.PhotoCollection.valueChanges();
      this.itemsCollection = this.afs.collection<History>('BroadcastMessage');
@@ -53,6 +55,9 @@ export class BroadcastComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', [Validators.required]]
+    })
   }
 
    upload(event) {
@@ -63,11 +68,11 @@ export class BroadcastComponent implements OnInit {
     setTimeout( () => {
       this.downloadURL = this.storage.ref(this.name).getDownloadURL();
       this.uploadStatus = true;
-     this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+    //  this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
   }, 3000);
   }
 
-  submit(message){
+  sendBroadcastMessage(message){
     return this.http.post(this.CloudUrl, JSON.stringify({
       "messages":[
           {
@@ -77,13 +82,13 @@ export class BroadcastComponent implements OnInit {
       ]
   })).toPromise().then((result) => {
     console.log(result);
-    this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
-    this.itemsCollection.add({ path: this.message , date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
     this.router.navigate(['/home']);
-    alert("Broadcast message is success");
+    //alert("Broadcast message is success");
   }).catch(err => {
     if(err.status == 200){
       alert('BroadCast message is sucess');
+      this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+      this.itemsCollection.add({ path: this.message , date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
       this.router.navigate(['/home']);
     }else{
     alert('Something went wrong:'+ JSON.stringify(err));
@@ -92,7 +97,7 @@ export class BroadcastComponent implements OnInit {
   });;
   }
 
-  submitPicture(name){
+  sendBroadcastPicture(name){
     return this.http.post(this.CloudUrl, JSON.stringify({
       "messages":[
           {
@@ -107,6 +112,7 @@ export class BroadcastComponent implements OnInit {
     this.router.navigate(['/home']);
   }).catch(err => {
     if(err.status == 200){
+      this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
       alert('BroadCast Picture is sucess');
       this.router.navigate(['/home']);
     }else{

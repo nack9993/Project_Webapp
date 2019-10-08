@@ -81,8 +81,8 @@ export class TableComponent implements OnInit {
 
   test: string;
   Url = 'https://api.line.me/v2/bot/message/broadcast';
-  CloudUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/WebRequest';
-  BroadcastPictureUrl = 'https://us-central1-line-bot-a451a.cloudfunctions.net/BroadCastMessage';
+  CloudUrl = 'https://us-central1-marry-marrige.cloudfunctions.net/WebRequest';
+  BroadcastPictureUrl = 'https://us-central1-marry-marrige.cloudfunctions.net/BroadCastMessage';
   headers = new HttpHeaders({
     // "Access-Control-Allow-Origin": "*"
   });
@@ -115,6 +115,7 @@ export class TableComponent implements OnInit {
     this.objects.push(this.objectName);
     console.log(this.objects)
     this.objectName = "";
+    return this.objects;
   }
 
   addTable(indexTable, tableName) {
@@ -152,10 +153,12 @@ export class TableComponent implements OnInit {
   }
 
   removeGuest(item: any, list: Array<any>) {
+    console.log(item);
     let index = list.map(function (e) {
       return e.guestName
     }).indexOf(item.guestName);
     list.splice(index, 1);
+    console.log(list);
   }
 
   removeObject(item: any, list: Array<any>) {
@@ -180,7 +183,7 @@ export class TableComponent implements OnInit {
     this.guests.push(this.guestsTemp[indexOftempGuest]);
 
     this.guestsTemp.splice(indexOftempGuest, 1);
-
+    return list;
   }
 
   removeTable(item: any, list: Array<any>) {
@@ -198,6 +201,7 @@ export class TableComponent implements OnInit {
     console.log(this.guestsTemp);
     list.splice(list.indexOf(item), 1);
     this.table--;
+    return list;
   }
 
   
@@ -223,6 +227,27 @@ export class TableComponent implements OnInit {
       alert("Please making a table plan first")
     }
   }
+
+  sendPushMessageForEachGuest(table,tables){
+    return this.http.post(this.CloudUrl, JSON.stringify({
+             "to": table[1],
+             "messages": [
+               {
+                 "type": "text",
+                 "text": "You Table name is : " + tables[1]
+               },
+             ]
+           })).toPromise().then((result) => {
+             console.log(result);
+             console.log("Broadcast message is success");
+           }).catch(err => {
+             if (err.status == 200) {
+               console.log('Broadcast table is sucess');
+             } else {
+               console.log('Something went wrong:' + JSON.stringify(err));
+             }
+           });
+          }
 
     transform(base64Image){
       return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + base64Image);
