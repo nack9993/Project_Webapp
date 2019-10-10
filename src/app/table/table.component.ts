@@ -129,11 +129,14 @@ export class TableComponent implements OnInit {
       }else{
         alert("This table name is already used");
         this.tableName = "";
+        return("This table name is already used");
       }
     }else{
+    // this.TableArray.push([this.table, this.tableName, []]);
     this.TableArray.push([this.table, this.tableName, []]);
     this.table++;
     this.tableName = "";
+    return(this.TableArray);
     }
   }
 
@@ -145,11 +148,17 @@ export class TableComponent implements OnInit {
       }
   }
 
-  onDrop({ dropData }: DropEvent<Guest>, item, tableName): void {
-    alert("Table " + tableName + " " + dropData.guestName)
-    this.TableArray[item][2].push([dropData.guestName, dropData.userId]);
+  onDrop({ dropData }: DropEvent<Guest>,selectedTable) {
+    console.log(selectedTable);
+
+    console.log(this.TableArray);
+    alert("Table " + selectedTable[1] + " " + dropData.guestName)
+
+    this.TableArray[this.TableArray.indexOf(selectedTable)][2].push([dropData.guestName, dropData.userId]);
+
     this.removeGuest(dropData, this.guests);
     this.guestsTemp.push(dropData);
+    return(this.TableArray);
   }
 
   removeGuest(item: any, list: Array<any>) {
@@ -159,6 +168,7 @@ export class TableComponent implements OnInit {
     }).indexOf(item.guestName);
     list.splice(index, 1);
     console.log(list);
+    return list;
   }
 
   removeObject(item: any, list: Array<any>) {
@@ -167,27 +177,22 @@ export class TableComponent implements OnInit {
       return e
     }).indexOf(item);
     list.splice(index, 1);
+    return list;
   }
 
 
-  removeGuestFromTable(guest: any, list: Array<any>, indexOfTable: any) {
-    console.log(indexOfTable);
-    list[indexOfTable][2].splice(list[indexOfTable][2].indexOf(guest), 1);
-    console.log(this.guestsTemp);
-
+  removeGuestFromTable(guest: any, list: Array<any>,indexOfTable: any, table) {
+    list[list.indexOf(table)][2].splice(list[list.indexOf(table)][2].indexOf(guest), 1);
     let indexOftempGuest = this.guestsTemp.map(function (e) {
       return e.guestName
     }).indexOf(guest[0]);
-
-    console.log(indexOftempGuest);
     this.guests.push(this.guestsTemp[indexOftempGuest]);
-
     this.guestsTemp.splice(indexOftempGuest, 1);
     return list;
   }
 
   removeTable(item: any, list: Array<any>) {
-    console.log(item);
+    console.log(list);
     for (var val of list[list.indexOf(item)][2]) {
       console.log(val[0]);
       let indexOftempGuest = this.guestsTemp.map(function (e) {
@@ -222,9 +227,11 @@ export class TableComponent implements OnInit {
           await this.delay(3000);
         }
         alert('Broadcast table is sucess');
+        return('Broadcast table is sucess');
       }
     }else{
       alert("Please making a table plan first")
+      return("Please making a table plan first");
     }
   }
 
@@ -243,8 +250,10 @@ export class TableComponent implements OnInit {
            }).catch(err => {
              if (err.status == 200) {
                console.log('Broadcast table is sucess');
+               return('Broadcast table is sucess');
              } else {
                console.log('Something went wrong:' + JSON.stringify(err));
+               return('Something went wrong:' + JSON.stringify(err));
              }
            });
           }
@@ -276,8 +285,10 @@ export class TableComponent implements OnInit {
         }).catch(err => {
           if (err.status == 200) {
             alert('Table Plan is successfully');
+            return('Table Plan is successfully');
           } else {
             alert('Something went wrong:' + JSON.stringify(err));
+            return('Something went wrong:' + JSON.stringify(err));
           }
         });
       }));

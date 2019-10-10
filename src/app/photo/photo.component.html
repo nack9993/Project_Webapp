@@ -1,4 +1,5 @@
 <div class="container">
+  
 <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
     <mdb-carousel-item *ngFor="let item of items | async">
       <img class="d-block w-100 h-100" [src]='item.path'>

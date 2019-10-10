@@ -14,7 +14,7 @@
 }
 
 .tablePlan{
-  font-size: 70%;
+  font-size: 80%;
   width: 100px;
   height: 100px;
   border: solid 1px #ccc;
@@ -24,7 +24,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgb(200, 123, 145);
+  background: #D3B3B8;
   border-radius: 20px;
   margin-right: 100px;
   position: absolute;
@@ -58,9 +58,8 @@
 }
 
 
-.example-list {
-  width: 300px;
-  max-width: 100%;
+.guestBox {
+  width: 90%;
   border: solid 1px #ccc;
   min-height: 60px;
   display: block;

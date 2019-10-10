@@ -68,6 +68,7 @@ export class BroadcastComponent implements OnInit {
     setTimeout( () => {
       this.downloadURL = this.storage.ref(this.name).getDownloadURL();
       this.uploadStatus = true;
+      return(this.name);
     //  this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
   }, 3000);
   }
@@ -90,9 +91,11 @@ export class BroadcastComponent implements OnInit {
       this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
       this.itemsCollection.add({ path: this.message , date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
       this.router.navigate(['/home']);
+      return('BroadCast message is sucess');
     }else{
     alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    return('Something went wrong:'+ JSON.stringify(err));
     }
   });;
   }
@@ -115,9 +118,11 @@ export class BroadcastComponent implements OnInit {
       this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
       alert('BroadCast Picture is sucess');
       this.router.navigate(['/home']);
+      return('BroadCast Picture is sucess');
     }else{
     alert('Something went wrong:'+ JSON.stringify(err));
     this.router.navigate(['/home']);
+    return('Something went wrong:'+ JSON.stringify(err));
     }
   });;
   }

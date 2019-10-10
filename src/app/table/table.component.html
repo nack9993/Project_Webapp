@@ -1,8 +1,6 @@
-<br><br><br>
 <head>
 		<script type="text/javascript" src="html2canvas-master/dist/html2canvas.js"></script>
 	</head>
-	
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -16,17 +14,15 @@
 						<input mdbInput mdbValidate formControlName="name" type="text" [(ngModel)]="tableName"
 							class="form-control mb-4" placeholder="Table Name">
 					</div>
-
-					<div class="row justify-content-center">
-						<button class="btn " (click)="addTable();basicModal.hide()"
-							style="margin-top: 5%; width: 50%;color: black" [disabled]="form.invalid">Submit</button>
-					</div>
 				</div>
-			</form>
-			<div class="modal-footer">
-				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+			<div class="modal-footer justify-content-center">
+					<button type="button" mdbBtn  color="light" class="waves-light"  mdbWavesEffect (click)="addTable();basicModal.hide()"
+				 [disabled]="form.invalid">Submit</button>
+
+				<button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
 					(click)="basicModal.hide()" mdbWavesEffect>Close</button>
 			</div>
+		</form>
 		</div>
 	</div>
 </div>
@@ -76,7 +72,7 @@
 				</div>
 			</form>
 			<div class="modal-footer justify-content-center">
-					<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+					<button type="button" mdbBtn class="waves-light  rgba-blue-light" aria-label="Close"
 					(click)="sendBroadCastTable();confirm.hide()" mdbWavesEffect>Save</button>
 				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
 					(click)="confirm.hide()" mdbWavesEffect>Cancle</button>
@@ -85,22 +81,22 @@
 	</div>
 </div>				
 
-<section class="my-5 " >
+<section class="my-5">
 	<div class="row">
 		<div class="col-sm-3 text-center" style="padding-left: 5%;">
 			<p >Guest List</p>
-			<div cdkDropList class="example-list z-depth-1">
+			<div cdkDropList class="guestBox z-depth-1">
 				<div class="example-box" *ngFor="let guest of guests" mwlDraggable dragActiveClass="drag-active"
 					[dropData]=guest cdkDragBoundary=".example-boundary">
 					<p class="text-center">
-						<mdb-icon fas icon="male" size="2x" class="red-text pr-2 ml-2" aria-hidden="true"></mdb-icon>
+						<mdb-icon fas icon="male" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true"></mdb-icon>
 						{{guest.guestName}} {{guest.guestType}}
 					</p>
 				</div>
 			</div>
 
 			<table  mdbTable class="table table-sm styleObj" bordered="true" >
-					<thead class="rgba-red-strong white-text">
+					<thead class=" rgba-blue-strong white-text">
 						<tr>
 							<th class="text-center">Object</th>
 						</tr>
@@ -129,7 +125,7 @@
 			<div class="container"  #screen>
 			<div class="example-boundary">
 				<div class="tablePlan" *ngFor="let table of TableArray" cdkDrag mwlDroppable
-					dragOverClass="drop-over-active" (drop)="onDrop($event,table[0],table[1])"
+					dragOverClass="drop-over-active" (drop)="onDrop($event,table)"
 					cdkDragBoundary=".example-boundary" ngResizable>
 					Table
 					{{table[1]}}
@@ -144,7 +140,7 @@
 		</div>
 
 			<table mdbTable class="table table-sm" bordered="true" style="margin-top : 3%">
-				<thead class="rgba-red-strong white-text">
+				<thead class="rgba-blue-strong white-text">
 					<tr>
 						<th class="text-center">Table Name</th>
 						<th class="text-center">Guests</th>
@@ -162,7 +158,7 @@
 							<span *ngFor="let so of some[2]" class="text-center">
 								<p>{{so[0]}}
 									<a mdbBtn floating="true" size="s"
-										(click)="removeGuestFromTable(so,TableArray,some[0])">
+										(click)="removeGuestFromTable(so,TableArray,some[0],some)">
 										<mdb-icon fas icon="trash-alt" class="red-text"></mdb-icon>
 									</a>
 								</p>
@@ -178,9 +174,9 @@
 				</div> -->
 		</div>
 		<div class="col-sm-3 text-center">
-		<button mdbBtn class="rgba-red-strong" size="m" (click)="basicModal.show()" style="width: 50%">Add Table</button><br>
-		<button mdbBtn class="rgba-red-strong" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
-	    <button mdbBtn class="red" size="lg" (click)="confirm.show()" style="width: 50%">Send</button>
+		<button mdbBtn class="rgba-blue-strong" size="m" (click)="basicModal.show()" style="width: 50%">Add Table</button><br>
+		<button mdbBtn class="rgba-blue-strong" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
+	    <button mdbBtn class="blue" size="lg" (click)="confirm.show()" style="width: 50%">Send</button>
 		</div>
 	</div>
 	

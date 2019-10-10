@@ -35,7 +35,7 @@
                   </div>
               
                   <input style="display: none" type="file" (change)="upload($event)" #fileInput accept=".png,.jpg" required><br>
-                  <div *ngIf="uploadProgress | async as pct">
+                  <div  *ngIf="uploadProgress | async as pct">
                   <progress max="100" [value]="pct"></progress><br>
                   {{ pct | number }}%
                 </div>
@@ -56,13 +56,13 @@
 <div class="container animated fadeIn text-center"  style="width: 60%">
   <div class="form">
       <p class="h4 mb-4"> Select type of message</p>
-        <button type="button" mdbBtn class="relative waves-light rgba-red-strong" (click)="basicModal.show()" mdbWavesEffect>Message</button>
-        <button type="button" mdbBtn  class="relative waves-light rgba-red-strong" (click)="picture.show()" mdbWavesEffect>Picture</button>
+        <button type="button" mdbBtn class="relative waves-light rgba-blue-light" (click)="basicModal.show()" mdbWavesEffect>Message</button>
+        <button type="button" mdbBtn  class="relative waves-light rgba-blue-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
   </div>
 
 
   <table class="table table-sm text-center" mdbTable striped="true"  style="margin-top: 50px;">
-    <thead class="rgba-red-light">
+    <thead class="rgba-blue-slight">
       <tr>
         <th scope="col">Broadcast</th>
         <th scope="col">Date and time</th>
