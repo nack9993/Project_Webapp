@@ -111,7 +111,7 @@ export class BroadcastComponent implements OnInit {
       ]
   })).toPromise().then((result) => {
     console.log(JSON.stringify(result));
-    alert("Broadcast picture is success");
+    //alert("Broadcast picture is success");
     this.router.navigate(['/home']);
   }).catch(err => {
     if(err.status == 200){

@@ -15,7 +15,8 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-export interface TabMessage { path: string, id: string, date: string };
+export interface TabMessage { NameOfTable: string, id: string, date: string };
+export interface TabPicture { path: string,  date: string };
 export interface BigArray { path: string[], date: string }
 @Component({
   selector: 'app-table',
@@ -34,11 +35,12 @@ export class TableComponent implements OnInit {
   message: string;
   private itemsCollection: AngularFirestoreCollection<TabMessage>;
   private BigCollection: AngularFirestoreCollection<BigArray>;
-  private PhotoCollection: AngularFirestoreCollection<TabMessage>;
+  private PhotoCollection: AngularFirestoreCollection<TabPicture>;
   tabMessage: Observable<TabMessage[]>;
-  tabPhoto: Observable<TabMessage[]>;
+  tabPhoto: Observable<TabPicture[]>;
   bigArray: Observable<BigArray[]>;
   userId: string;
+  dateMessage: string;
 
   TableArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
 
@@ -48,7 +50,7 @@ export class TableComponent implements OnInit {
     private storage: AngularFireStorage, private sanitizer: DomSanitizer,private db: AngularFireDatabase) {
     this.itemsCollection = this.afs.collection<TabMessage>('TableMessage');
     this.tabMessage = this.itemsCollection.valueChanges();
-    this.PhotoCollection = this.afs.collection<TabMessage>('TablePhoto');
+    this.PhotoCollection = this.afs.collection<TabPicture>('TablePhoto');
     this.tabPhoto = this.PhotoCollection.valueChanges();
     this.BigCollection = this.afs.collection<BigArray>('NumTable');
     this.bigArray = this.BigCollection.valueChanges();
@@ -250,6 +252,8 @@ export class TableComponent implements OnInit {
            }).catch(err => {
              if (err.status == 200) {
                console.log('Broadcast table is sucess');
+               this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
+               this.itemsCollection.add({NameOfTable: tables[1], id: table[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
                return('Broadcast table is sucess');
              } else {
                console.log('Something went wrong:' + JSON.stringify(err));
@@ -285,6 +289,7 @@ export class TableComponent implements OnInit {
         }).catch(err => {
           if (err.status == 200) {
             alert('Table Plan is successfully');
+            this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
             return('Table Plan is successfully');
           } else {
             alert('Something went wrong:' + JSON.stringify(err));
