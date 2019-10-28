@@ -285,7 +285,7 @@ export class TableComponent implements OnInit {
         }).catch(err => {
           if (err.status == 200) {
             alert('Table Plan is successfully');
-            this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media"+this.name+"?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
+            this.PhotoCollection.add({path: "https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/Test?alt=media",date : this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
             return('Table Plan is successfully');
           } else {
             alert('Something went wrong:' + err.status) ;
