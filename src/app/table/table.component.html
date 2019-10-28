@@ -17,9 +17,8 @@
 				</div>
 			<div class="modal-footer justify-content-center">
 					<button type="button" mdbBtn  color="light" class="waves-light"  mdbWavesEffect (click)="addTable();basicModal.hide()"
-				 [disabled]="form.invalid">Submit</button>
-
-				<button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
+					[disabled]="form.invalid" style="width: 50%;">Submit</button>
+				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
 					(click)="basicModal.hide()" mdbWavesEffect>Close</button>
 			</div>
 		</form>
@@ -40,18 +39,18 @@
 				<div class="modal-body">
 					<div class="md-form md-outline">
 							<div class="md-form md-outline">
-									<input mdbInput mdbValidate formControlName="objectName" type="text" [(ngModel)]="objectName"
+									<input mdbInput mdbValidate formControlName="Object Name" type="text" [(ngModel)]="objectName"
 										class="form-control mb-4" placeholder="Object Name">
 								</div>
 					</div>
 				</div>
-			</form>
-			<div class="modal-footer">
+			<div class="modal-footer justify-content-center">
 					<button mdbBtn color="pink" (click)="addObject();objectModal.hide()" [disabled]="Objectform.invalid">Submit</button>
 
 				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
 					(click)="objectModal.hide()" mdbWavesEffect>Close</button>
 			</div>
+		</form>
 		</div>
 	</div>
 </div>
@@ -89,8 +88,9 @@
 				<div class="example-box" *ngFor="let guest of guests" mwlDraggable dragActiveClass="drag-active"
 					[dropData]=guest cdkDragBoundary=".example-boundary">
 					<p class="text-center">
-						<mdb-icon fas icon="male" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true"></mdb-icon>
-						{{guest.guestName}} {{guest.guestType}}
+						<mdb-icon fas icon="male" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Bride'"></mdb-icon>
+						<mdb-icon fas icon="male" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Groom'"></mdb-icon>
+						{{guest.guestName}} : {{guest.guestType}} : {{guest.guestRelationship}}
 					</p>
 				</div>
 			</div>

@@ -107,7 +107,6 @@ export class TableComponent implements OnInit {
     this.db.list('/guests').valueChanges()   // returns observable
     .subscribe(list=> {
     this.guests = list;
-    console.log(this.guests);
     })
   }
 
@@ -126,6 +125,8 @@ export class TableComponent implements OnInit {
         this.TableArray.push([this.table, this.tableName, []]);
       this.table++;
       this.tableName = "";
+      console.log(this.TableArray);
+      return(this.TableArray);
       }else{
         alert("This table name is already used");
         this.tableName = "";
@@ -136,6 +137,7 @@ export class TableComponent implements OnInit {
     this.TableArray.push([this.table, this.tableName, []]);
     this.table++;
     this.tableName = "";
+    console.log(this.TableArray);
     return(this.TableArray);
     }
   }
@@ -149,15 +151,13 @@ export class TableComponent implements OnInit {
   }
 
   onDrop({ dropData }: DropEvent<Guest>,selectedTable) {
-    console.log(selectedTable);
-
-    console.log(this.TableArray);
     alert("Table " + selectedTable[1] + " " + dropData.guestName)
 
     this.TableArray[this.TableArray.indexOf(selectedTable)][2].push([dropData.guestName, dropData.userId]);
 
     this.removeGuest(dropData, this.guests);
     this.guestsTemp.push(dropData);
+    console.log(this.TableArray);
     return(this.TableArray);
   }
 
@@ -192,20 +192,17 @@ export class TableComponent implements OnInit {
   }
 
   removeTable(item: any, list: Array<any>) {
-    console.log(list);
     for (var val of list[list.indexOf(item)][2]) {
-      console.log(val[0]);
       let indexOftempGuest = this.guestsTemp.map(function (e) {
         return e.guestName
       }).indexOf(val[0]);
-      console.log(indexOftempGuest);
       this.guests.push(this.guestsTemp[indexOftempGuest]);
-      console.log(this.guests)
       // this.guestsTemp.splice(indexOftempGuest,1);
     }
     console.log(this.guestsTemp);
     list.splice(list.indexOf(item), 1);
     this.table--;
+    console.log(list);
     return list;
   }
 
@@ -215,14 +212,14 @@ export class TableComponent implements OnInit {
 }
 
   async  sendBroadCastTable() {
-    console.log(this.TableArray);
     if(this.TableArray.length != 0 ){
       this.screenshot();
-      console.log(this.TableArray.length)
       if (this.TableArray.length !== 0) {
         for (let tables of this.TableArray) {
           for (let table of tables[2]) {
+            console.log(table +""+ tables);
            this.sendPushMessageForEachGuest(table,tables);
+           
           }
           await this.delay(3000);
         }
@@ -275,19 +272,18 @@ export class TableComponent implements OnInit {
           "messages":[
             {
                 "type":"image",
-                "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media',
-                "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/line-bot-a451a.appspot.com/o/Test?alt=media'
+                "originalContentUrl":'https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/Test?alt=media',
+                "previewImageUrl":'https://firebasestorage.googleapis.com/v0/b/marry-marrige.appspot.com/o/Test?alt=media'
             }
         ]
         })).toPromise().then((result) => {
-          console.log(result);
           alert("Broadcast message is success");
         }).catch(err => {
           if (err.status == 200) {
             alert('Table Plan is successfully');
             return('Table Plan is successfully');
           } else {
-            alert('Something went wrong:' + JSON.stringify(err));
+            alert('Something went wrong:' + err.status) ;
             return('Something went wrong:' + JSON.stringify(err));
           }
         });

@@ -8,14 +8,20 @@
       <tr >
         <th scope="col"><h5>Guest name</h5></th>
         <th scope="col"><h5>Guest type</h5></th>
-        <th scope="col"><h5>Guest Acceptance</h5></th>
+        <th scope="col"><h5>From</h5></th>
+        <th scope="col"><h5>Invitation Status</h5></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let guest of guests">
         <td>{{guest.guestName}}</td>
-        <td>{{guest.guestType}}</td>
-        <td>{{guest.guestAcceptance}}</td>
+        <td>        <mdb-icon fas icon="male" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Bride'"></mdb-icon>
+          <mdb-icon fas icon="male" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Groom'"></mdb-icon>{{guest.guestType}}</td>
+        <td>{{guest.guestRelationship}}</td>
+        <td>   <mdb-icon fas icon="check" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Accept invitation'"></mdb-icon>
+          <mdb-icon fas icon="question" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Not sure'"></mdb-icon>
+          <mdb-icon fas icon="times" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Reject invitation'"></mdb-icon>
+          {{guest.guestAcceptance}}</td>
       </tr>
     </tbody>
   </table>
