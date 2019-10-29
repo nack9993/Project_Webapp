@@ -35,8 +35,8 @@
           <mdb-icon fas icon="times" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Reject invitation'"></mdb-icon>
               <mdb-icon fas icon="clock" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Pending'">
           </mdb-icon>
-          {{guest.guestAcceptance}}</td>
-        <button mdbBtn class="rgba-blue-strong" size="lg" (click)="confirm.show()" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation'">Message</button></td>
+          {{guest.guestAcceptance}}
+        <button mdbBtn class="rgba-blue-strong" size="sm" (click)="confirm.show()" style="width: 30%" *ngIf="guest.guestAcceptance == 'Not sure invitation'">Re-comfirm</button></td>
       </tr>
     </tbody>
   </table>
