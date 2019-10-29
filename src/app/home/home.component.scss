@@ -1,15 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400);
+@import url(https://fonts.googleapis.com/css?family=Quintessential);
+
 .view {
     background: url("https://images.pexels.com/photos/6165/white-rings-decoration-macro.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")no-repeat center center;
     background-size: cover;
      height: 700px;
 }
 
+.mb-5{
+  font-family: 'Quicksand', Arial, sans serif;
+}
+
 .view1{
+  font-family: 'Quicksand', Arial, sans serif;
   margin-top: 30px;
   margin-bottom: 30px ;
 }
 
 .view2{
+  font-family: 'Quicksand', Arial, sans serif;
   color: white;
   background: #bec6d4;
   margin-top: 30px;
@@ -22,10 +31,10 @@ img {
   margin-right: auto;
   width: 70%;
   height: 70%;
-  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-              0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  // transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  // box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+  //             0 2px 2px 0 rgba(0, 0, 0, 0.14),
+  //             0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 
@@ -48,4 +57,73 @@ img {
   .heading{
     font-family: 'Droid Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   }
+
+  .flip {
+    position: relative;
+    >.front,
+    >.back {
+        display: block;
+        transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+        transition-duration: 1s;
+        transition-property: transform, opacity;
+    }
+    >.front {
+        transform: rotateY(0deg);
+    }
+    >.back {
+        position: absolute;
+        opacity: 0;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        transform: rotateY(-180deg);
+    }
+    &:hover {
+        >.front {
+            transform: rotateY(180deg);
+        }
+        >.back {
+            opacity: 1;
+            transform: rotateY(0deg);
+        }
+    }
+    &.flip-vertical {
+        >.back {
+            transform: rotateX(-180deg);
+        }
+        &:hover {
+            >.front {
+                transform: rotateX(180deg);
+            }
+            >.back {
+                transform: rotateX(0deg);
+            }
+        }
+    }
+}
+
+.flip {
+  position: relative;
+  display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 1em;
+  width: 800px;
+  >.front,
+  >.back {
+    display: block;
+    color: white;
+    width: inherit;
+    background-size: cover!important;
+    background-position: center!important;
+    height: 400px;
+    padding: 1em 2em;
+    background: #313131;
+    p {
+      font-size: 0.9125rem;
+      line-height: 160%;
+      color: #999;
+    }
+  }
+}
 }

@@ -28,6 +28,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularDraggableModule} from 'angular2-draggable';
 import { environment } from '../environments/environment';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     DragDropModule ,
     DragAndDropModule,
-    AngularDraggableModule
+    AngularDraggableModule,
+    SlideshowModule
   ],
   providers: [AuthService,DatePipe],
   bootstrap: [AppComponent]

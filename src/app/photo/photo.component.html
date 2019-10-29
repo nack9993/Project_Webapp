@@ -1,6 +1,54 @@
+<div class="container" style="margin-top: 20px;">
 
-  <mdb-carousel class="carousel slide carousel-fade" [animation]="'slide'">
-    <mdb-carousel-item *ngFor="let item of items | async">
-      <img class="d-block" [src]='item.path'>
-    </mdb-carousel-item>
-  </mdb-carousel>
+<div style="margin-bottom:25px">
+  <div style="display:block;"
+       [style.width]="width">
+    <slideshow #slideshow
+               [imageUrls]="imageUrls"
+               [height]="height"
+               [minHeight]="minHeight"
+               [arrowSize]="arrowSize"
+               [showArrows]="showArrows"
+               [disableSwiping]="disableSwiping"
+               [autoPlay]="autoPlay"
+               [stopAutoPlayOnSlide]="stopAutoPlayOnSlide"
+               [debug]="debug"
+               [backgroundSize]="backgroundSize"
+               [backgroundPosition]="backgroundPosition"
+               [backgroundRepeat]="backgroundRepeat"
+               [showDots]="showDots"
+               [dotColor]="dotColor"
+               [showCaptions]="showCaptions"
+               [captionColor]="captionColor"
+               [captionBackground]="captionBackground"
+               [lazyLoad]="lazyLoad"
+               [hideOnNoSlides]="hideOnNoSlides"
+               [fullscreen]="fullscreen"
+>
+    </slideshow>
+  </div>
+</div>
+
+<table mdbTable>
+  <tr>
+    <td>
+      <label for="autoPlay">autoPlay</label>
+    </td>
+    <td>
+      <input id="autoPlay"
+             type="checkbox"
+             name="autoPlay"
+             [(ngModel)]="autoPlay">
+    </td>
+    <td>
+      <label for="fullscreen">fullscreen</label>
+    </td>
+    <td>
+      <input id="fullscreen"
+             type="checkbox"
+             name="fullscreen"
+             [(ngModel)]="fullscreen">
+    </td>
+  </tr>
+</table>
+</div>

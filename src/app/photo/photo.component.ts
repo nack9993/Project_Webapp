@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable, Timestamp } from 'rxjs';
+import { IImage } from 'ng-simple-slideshow';
 
 export interface Item { path: string; }
 
@@ -15,11 +16,37 @@ export class PhotoComponent implements OnInit {
   items: Observable<Item[]>;
   url: Observable<string []>;
   text: String;
+  itemArray : String[];
+  i : number = 1;
+
+  height: string = '600px';
+  minHeight: string;
+  arrowSize: string = '30px';
+  showArrows: boolean = true;
+  disableSwiping: boolean = false;
+  autoPlay: boolean = true;
+  autoPlayInterval: number = 3333;
+  stopAutoPlayOnSlide: boolean = true;
+  debug: boolean = false;
+  backgroundSize: string = 'cover';
+  backgroundPosition: string = 'center center';
+  backgroundRepeat: string = 'no-repeat';
+  showDots: boolean = true;
+  dotColor: string = '#FFF';
+  showCaptions: boolean = true;
+  captionColor: string = '#FFF';
+  captionBackground: string = 'rgba(0, 0, 0, .35)';
+  lazyLoad: boolean = false;
+  hideOnNoSlides: boolean = false;
+  width: string = '100%';
+  fullscreen: boolean = false;
+  enableZoom: boolean = false;
+  enablePan: boolean = false;
+  noLoop: boolean = false;
 
   constructor(private storage: AngularFireStorage,private afs: AngularFirestore) {
     this.itemsCollection = afs.collection<Item>('photos');
     this.items = this.itemsCollection.valueChanges();
-    console.log(this.items);
  }
 
   getDownloadUrl(file){
@@ -27,28 +54,19 @@ export class PhotoComponent implements OnInit {
   return this.storage.ref(file).getDownloadURL();
  }
 
- imagesBasic = [
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg', description: 'Image 1' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg', description: 'Image 2' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(131).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(131).jpg', description: 'Image 3' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(123).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(123).jpg', description: 'Image 4' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(118).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(118).jpg', description: 'Image 5' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(128).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(128).jpg', description: 'Image 6' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(132).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(132).jpg', description: 'Image 7' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(115).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(115).jpg', description: 'Image 8' },
-  { img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(133).jpg', thumb:
-  'https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(133).jpg', description: 'Image 9' }
+
+  
+  imageUrls: String [] = [
   ];
 
+
   ngOnInit() {
+    this.items.subscribe(res=> {for(var i =0;i <res.length;i++ ){
+      this.text = res[i].path;
+      this.imageUrls.push(this.text);
+    }
+    }
+    )
   }
 
 

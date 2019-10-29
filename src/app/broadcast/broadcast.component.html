@@ -52,13 +52,30 @@
       </div>
     </div>
 
+    
+  <header class="masthead">
+      <div class="intro-text">
+  <div class="view intro-2">
+    <div class="full-bg-img">
+      <div class="mask rgba-black-light flex-center">
+        <div class="container">
+          <div class="white-text text-center wow fadeInUp">
+              <div class="form">
+                  <p class="h4 mb-4"> Select type of message</p>
+                    <button type="button" mdbBtn class="relative waves-light rgba-blue-light" (click)="basicModal.show()" mdbWavesEffect>Message</button>
+                    <button type="button" mdbBtn  class="relative waves-light rgba-blue-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </header>
+  
+
 
 <div class="container animated fadeIn text-center"  style="width: 60%">
-  <div class="form">
-      <p class="h4 mb-4"> Select type of message</p>
-        <button type="button" mdbBtn class="relative waves-light rgba-blue-light" (click)="basicModal.show()" mdbWavesEffect>Message</button>
-        <button type="button" mdbBtn  class="relative waves-light rgba-blue-light" (click)="picture.show()" mdbWavesEffect>Picture</button>
-  </div>
 
 
   <table class="table table-sm text-center" mdbTable striped="true"  style="margin-top: 50px;">
