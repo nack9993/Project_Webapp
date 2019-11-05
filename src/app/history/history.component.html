@@ -1,0 +1,23 @@
+<div class="container" >
+<table class="table table-sm text-center" mdbTable striped="true"  style="margin-top: 50px;">
+  <thead class="rgba-blue-slight">
+    <tr>
+      <th scope="col">Picture of the table plan</th>
+      <th scope="col">Name of the table</th>
+      <th scope="col">Name of the guest</th>
+      <th scope="col">Date and time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let tabPhoto of TabPhoto">
+      <img class="d-block w-1 h-1 center" [src]='tabPhoto.path'>
+    </tr>
+    <tr mdbTableCol *ngFor="let tabMessage of TabMessage">
+      <td>{{tabMessage.NameOfTable}}</td>
+      <td>{{tabMessage.id}}</td>
+       <!-- ค่อยเพิ่มชื่อ แก้เป็นชื่อ -->
+      <td>{{tabMessage.date}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

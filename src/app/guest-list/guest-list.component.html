@@ -22,7 +22,7 @@
           <mdb-icon fas icon="question" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Not sure invitation'"></mdb-icon>
           <mdb-icon fas icon="times" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Reject invitation'"></mdb-icon>
           {{guest.guestAcceptance}}
-        <button mdbBtn class="rgba-blue-strong" size="lg" (click)="confirm.show()" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation'">Message</button></td>
+        <button mdbBtn class="rgba-blue-strong" size="sm" mdbWavesEffect type="button" (click)="confirm.show()" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation' || guest.guestAcceptance == 'Pending' ">Message</button></td>
       </tr>
     </tbody>
   </table>

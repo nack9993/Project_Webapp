@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { WishComponent } from './wish/wish.component';
 import { AdminComponent } from './admin/admin.component';
 import { TableComponent } from './table/table.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'contact', component:ContactComponent},
   {path: 'wish', component:WishComponent},
-  {path: 'admin', component:AdminComponent}
+  {path: 'admin', component:AdminComponent},
+  {path: 'history', component:HistoryComponent}
 ];
 
 @NgModule({
