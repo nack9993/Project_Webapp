@@ -1,3 +1,41 @@
-<p>
-  contact works!
-</p>
+<header class="masthead">
+    <div class="intro-text">
+<div class="view intro-2">
+  <div class="full-bg-img">
+    <div class="mask rgba-black-light flex-center">
+        <div class="white-text text-center wow fadeInUp">
+            <div class="form">
+                <h1>Contact</h1>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+</header>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-center">
+    </div>
+    <table class="table table-striped">
+      <thead class="rgba-blue-slight">
+        <tr >
+          <th scope="col"><h5>Guest name</h5></th>
+          <th scope="col"><h5>Question</h5></th>
+          <th scope="col"><h5>Answer</h5></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guest of guests">
+          <td>{{guest.guestName}}</td>
+          <td>{{guest.contact}}</td>
+          <td><button type="button" mdbBtn color="secondary" class="waves-light">Answer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+
+
+  
+  

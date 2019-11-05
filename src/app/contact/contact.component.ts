@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private db: AngularFireDatabase) {}
 
+   
   ngOnInit() {
-  }
+    this.db.list('/guests').valueChanges()   // returns observable
+              .subscribe(list=> {
+              this.guests = list;
+              console.log(this.guests);
+              })
+}
+
+     guests: any;
 
 }

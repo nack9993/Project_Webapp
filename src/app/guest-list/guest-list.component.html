@@ -1,8 +1,21 @@
-
-<div class="container" >
-  <div class="row justify-content-center ">
-    <h2 >Guest</h2>
+<header class="masthead">
+    <div class="intro-text">
+<div class="view intro-2">
+  <div class="full-bg-img">
+    <div class="mask rgba-black-light flex-center">
+        <div class="white-text text-center wow fadeInUp">
+            <div class="form">
+                <h1>Guest</h1>
+                <p>Guest who registered in the chatbot will appear in here.</p>
+            </div>
+        </div>
+    </div>
   </div>
+</div>
+</div>
+</header>
+
+<div class="container wow fadeInUp" style="margin-top: 20px;">
   <table class="table table-striped">
     <thead class="rgba-blue-slight">
       <tr >
@@ -13,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let guest of guests">
+      <tr  *ngFor="let guest of guests">
         <td>{{guest.guestName}}</td>
         <td>        <mdb-icon fas icon="male" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Bride'"></mdb-icon>
           <mdb-icon fas icon="male" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestType == 'Groom'"></mdb-icon>{{guest.guestType}}</td>
@@ -21,6 +34,8 @@
         <td>   <mdb-icon fas icon="check" size="2x" class="blue-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Accept invitation'"></mdb-icon>
           <mdb-icon fas icon="question" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Not sure invitation'"></mdb-icon>
           <mdb-icon fas icon="times" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Reject invitation'"></mdb-icon>
+              <mdb-icon fas icon="clock" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Pending'">
+          </mdb-icon>
           {{guest.guestAcceptance}}
         <button mdbBtn class="rgba-blue-strong" size="sm" mdbWavesEffect type="button" (click)="confirm.show()" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation' || guest.guestAcceptance == 'Pending' ">Message</button></td>
       </tr>

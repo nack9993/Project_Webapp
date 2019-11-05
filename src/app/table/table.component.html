@@ -39,7 +39,7 @@
 				<div class="modal-body">
 					<div class="md-form md-outline">
 							<div class="md-form md-outline">
-									<input mdbInput mdbValidate formControlName="Object Name" type="text" [(ngModel)]="objectName"
+									<input mdbInput mdbValidate formControlName="objectName" type="text" [(ngModel)]="objectName"
 										class="form-control mb-4" placeholder="Object Name">
 								</div>
 					</div>
@@ -80,7 +80,7 @@
 	</div>
 </div>				
 
-<section class="my-5">
+<section class="my-5  wow slideInUp">
 	<div class="row">
 		<div class="col-sm-3 text-center" style="padding-left: 5%;">
 			<p >Guest List</p>
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 
-			<table  mdbTable class="table table-sm styleObj" bordered="true" >
+			<table  mdbTable class="table table-sm styleObj  wow slideInUp" bordered="true" >
 					<thead class=" rgba-blue-strong white-text">
 						<tr>
 							<th class="text-center">Object</th>
@@ -121,7 +121,7 @@
 				</table>
 		</div>
 		
-		<div class="col-sm-6" >
+		<div class="col-sm-6  wow slideInUp" >
 			<div class="container"  #screen>
 			<div class="example-boundary">
 				<div class="tablePlan" *ngFor="let table of TableArray" cdkDrag mwlDroppable
@@ -139,7 +139,7 @@
 		</div>
 		</div>
 
-			<table mdbTable class="table table-sm" bordered="true" style="margin-top : 3%">
+			<table mdbTable class="table table-sm  wow slideInUp" bordered="true" style="margin-top : 3%">
 				<thead class="rgba-blue-strong white-text">
 					<tr>
 						<th class="text-center">Table Name</th>
@@ -174,9 +174,9 @@
 				</div> -->
 		</div>
 		<div class="col-sm-3 text-center">
-		<button mdbBtn class="rgba-blue-strong" size="m" (click)="basicModal.show()" style="width: 50%">Add Table</button><br>
-		<button mdbBtn class="rgba-blue-strong" size="m" (click)="objectModal.show()" style="width: 50%">Add Object</button>
-	    <button mdbBtn class="blue" size="lg" (click)="confirm.show()" style="width: 50%">Send</button>
+		<button mdbBtn class="rgba-blue-strong wow slideInUp" size="m" (click)="basicModal.show()" style="width: 50%" data-wow-duration="1s" data-wow-delay="0.2s">Add Table</button><br>
+		<button mdbBtn class="rgba-blue-strong wow slideInUp" size="m" (click)="objectModal.show()" style="width: 50%"  data-wow-duration="1s" data-wow-delay="0.5s">Add Object</button>
+	    <button mdbBtn class="blue wow slideInUp" size="lg" (click)="confirm.show()" style="width: 50%"  data-wow-duration="1s" data-wow-delay="0.7s">Send</button>
 		</div>
 	</div>
 	
