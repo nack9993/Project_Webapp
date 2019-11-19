@@ -14,13 +14,16 @@ export class WishComponent implements OnInit {
 
    
   ngOnInit() {
-    this.db.list('/guests').valueChanges()   // returns observable
-              .subscribe(list=> {
-              this.guests = list;
-              console.log(this.guests);
-              })
+    this.viewWeddingWish();
 }
 
+viewWeddingWish(){
+  this.db.list('/guests').valueChanges()   // returns observable
+  .subscribe(list=> {
+  this.guests = list;
+  console.log(this.guests);
+  })
+}
      guests: any;
 
 

@@ -82,6 +82,8 @@ export class TableComponent implements OnInit {
   width: number;
   height: number;
 
+  color: string = "#D3B3B8";
+
   test: string;
   Url = 'https://api.line.me/v2/bot/message/broadcast';
   CloudUrl = 'https://us-central1-marry-marrige.cloudfunctions.net/WebRequest';
@@ -96,7 +98,8 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      color:['', [Validators.required]]
     })
 
     this.Objectform = this.fb.group({
@@ -125,7 +128,7 @@ export class TableComponent implements OnInit {
     if(this.TableArray.length != 0){
       this.checkTableName(this.tableName);
       if(this.checkTableNameBoolean == true){
-        this.TableArray.push([this.table, this.tableName, []]);
+        this.TableArray.push([this.table, this.tableName, [], this.color]);
       this.table++;
       this.tableName = "";
       console.log(this.TableArray);
@@ -137,7 +140,7 @@ export class TableComponent implements OnInit {
       }
     }else{
     // this.TableArray.push([this.table, this.tableName, []]);
-    this.TableArray.push([this.table, this.tableName, []]);
+    this.TableArray.push([this.table, this.tableName, [],this.color]);
     this.table++;
     this.tableName = "";
     console.log(this.TableArray);

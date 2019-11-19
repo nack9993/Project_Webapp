@@ -9,7 +9,7 @@
     <tbody>
       <tr mdbTableCol *ngFor="let item of items | async">
         <th scope="row"> </th>
-        <img class="d-block w-1 h-1" [src]='item.path'>
+        <img class="d-block w-1 h-1" [src]='item.path' >
         <td>{{item.name}}</td>
         <td>
             <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" >Download</button>
