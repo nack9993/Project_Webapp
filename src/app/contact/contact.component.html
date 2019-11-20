@@ -14,7 +14,7 @@
         </div>
         <div class="modal-footer  justify-content-center">
           <button type="button" mdbBtn  class="btn" (click)="sendAnswerToGuest()" [disabled]="form.invalid">Submit</button>
-          <button type="button" mdbBtn  class="waves-light" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+          <button type="button" mdbBtn  class="waves-light" (click)="basicModal.hide();setUserId('');setQuestion('');setKey('')" mdbWavesEffect>Close</button>
         </div>
       </form>
       </div>
@@ -43,16 +43,14 @@
     <table class="table table-striped">
       <thead class="rgba-blue-slight">
         <tr >
-          <th scope="col"><h5>Guest name</h5></th>
           <th scope="col"><h5>Question</h5></th>
           <th scope="col"><h5>Answer</h5></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let guest of guests">
-          <td>{{guest.guestName}}</td>
           <td>{{guest.contact}}</td>
-          <td><button type="button" mdbBtn color="secondary" class="waves-light" (click)="basicModal.show();setUserId(guest.userId);setQuestion(guest.contact)">Answer</button></td>
+          <td><button type="button" mdbBtn color="secondary" class="waves-light" (click)="basicModal.show();setUserId(guest.userId);setQuestion(guest.contact);setKey(guest.id)">Answer</button></td>
         </tr>
       </tbody>
     </table>

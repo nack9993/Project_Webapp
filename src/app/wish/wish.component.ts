@@ -18,7 +18,7 @@ export class WishComponent implements OnInit {
 }
 
 viewWeddingWish(){
-  this.db.list('/guests').valueChanges()   // returns observable
+  this.db.list('/weddingWish').valueChanges()   // returns observable
   .subscribe(list=> {
   this.guests = list;
   console.log(this.guests);
