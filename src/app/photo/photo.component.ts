@@ -61,6 +61,10 @@ export class PhotoComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getPhoto();
+  }
+
+  getPhoto(){
     this.items.subscribe(res=> {for(var i =0;i <res.length;i++ ){
       this.text = res[i].path;
       this.imageUrls.push(this.text);
@@ -68,7 +72,6 @@ export class PhotoComponent implements OnInit {
     }
     )
   }
-
 
 
 }

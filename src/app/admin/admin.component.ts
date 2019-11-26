@@ -30,6 +30,8 @@ export class AdminComponent implements OnInit {
   }
 
   delete(name){
+    console.log("Remove Success!");
+    alert("Remove Success!")
    return  this.afs.collection('photos').doc(name).delete();
   }
 

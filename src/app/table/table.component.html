@@ -14,6 +14,18 @@
 						<input mdbInput mdbValidate formControlName="name" type="text" [(ngModel)]="tableName"
 							class="form-control mb-4" placeholder="Table Name">
 					</div>
+					<div class="md-form md-outline">
+						<!-- <input mdbInput mdbValidate formControlName="color" type="text" [(ngModel)]="color"
+							class="form-control mb-4" placeholder="Color"> -->
+
+							<h5> Color</h5>
+							<select mdbInput mdbValidate formControlName="color" class="browser-default custom-select" [(ngModel)]="color" >
+								<option value="#b3c8d3">Blue</option>
+								<option value="#b3d3be">Green</option>
+								<option value="#D3B3B8" selected>Pink</option>
+								<option value="#b3b8d3">Purple</option>
+							  </select>
+					</div>
 				</div>
 			<div class="modal-footer justify-content-center">
 					<button type="button" mdbBtn  color="light" class="waves-light"  mdbWavesEffect (click)="addTable();basicModal.hide()"
@@ -126,7 +138,7 @@
 			<div class="example-boundary">
 				<div class="tablePlan" *ngFor="let table of TableArray" cdkDrag mwlDroppable
 					dragOverClass="drop-over-active" (drop)="onDrop($event,table)"
-					cdkDragBoundary=".example-boundary" ngResizable>
+					cdkDragBoundary=".example-boundary" ngResizable [ngStyle]="{'background': table[3]}">
 					Table
 					{{table[1]}}
 
