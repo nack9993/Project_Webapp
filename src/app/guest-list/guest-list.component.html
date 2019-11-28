@@ -37,7 +37,7 @@
               <mdb-icon fas icon="clock" size="2x" class="red-text pr-2 ml-2" aria-hidden="true" *ngIf="guest.guestAcceptance == 'Pending'">
           </mdb-icon>
           {{guest.guestAcceptance}}
-        <button mdbBtn class="rgba-blue-strong" size="sm" mdbWavesEffect type="button" (click)="confirm.show()" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation' || guest.guestAcceptance == 'Pending' ">Message</button></td>
+        <button mdbBtn class="rgba-blue-strong" size="sm" mdbWavesEffect type="button" (click)="confirm.show();setUserId(guest.userId)" style="width: 50%" *ngIf="guest.guestAcceptance == 'Not sure invitation' || guest.guestAcceptance == 'Pending' ">Resend Message</button></td>
       </tr>
     </tbody>
   </table>
@@ -60,7 +60,7 @@
 					<button type="button" mdbBtn class="waves-light  rgba-blue-light" aria-label="Close"
 					(click)="sendBroadCastAcception();confirm.hide()" mdbWavesEffect>Sure</button>
 				<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-					(click)="confirm.hide()" mdbWavesEffect>Cancle</button>
+					(click)="confirm.hide();setUserId('')" mdbWavesEffect>Cancle</button>
 			</div>
 		</div>
 	</div>

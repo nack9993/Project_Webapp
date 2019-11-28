@@ -12,7 +12,8 @@
         <img class="d-block w-1 h-1" [src]='item.path' >
         <td>{{item.name}}</td>
         <td>
-            <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" >Download</button>
+            <!-- <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" (click)="getDownloadUrl(item.name)">Download</button> -->
+            <a mdbBtn color="indigo"  size="sm" mdbWavesEffect class="m-0" type="button" [href]="item.path" download="Image.jpg" style="color: white;">View</a>
           <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0" (click)="click(item.name,item.path)">Delete</button>
         </td>
       </tr>

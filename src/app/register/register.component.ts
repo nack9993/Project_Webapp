@@ -50,6 +50,8 @@ export class RegisterComponent implements OnInit {
 
    resetpassword(email:string){
     this.auth.resetPassword(email);
+    console.log("Reset password success");
+    return "Reset password success"
   }
 
 }

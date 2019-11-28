@@ -15,11 +15,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginByService() {
+  loginByService(email,password) {
     if (this.email && this.password ) {
       this.auth.login(this.email, this.password).then( (result) => {
-        if (result === "Fail") {
-          alert("Authentication failed.");
+        if (result === "Authentication failed") {
+          alert("Authentication Fail");
+          return('Authentication failed');
         }
       })
       this.email = this.password = '';  

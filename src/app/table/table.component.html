@@ -15,9 +15,6 @@
 							class="form-control mb-4" placeholder="Table Name">
 					</div>
 					<div class="md-form md-outline">
-						<!-- <input mdbInput mdbValidate formControlName="color" type="text" [(ngModel)]="color"
-							class="form-control mb-4" placeholder="Color"> -->
-
 							<h5> Color</h5>
 							<select mdbInput mdbValidate formControlName="color" class="browser-default custom-select" [(ngModel)]="color" >
 								<option value="#b3c8d3">Blue</option>
@@ -55,6 +52,15 @@
 										class="form-control mb-4" placeholder="Object Name">
 								</div>
 					</div>
+					<div class="md-form md-outline">
+						<h5> Color</h5>
+						<select mdbInput mdbValidate formControlName="objectColor" class="browser-default custom-select" [(ngModel)]="objectColor" >
+							<option value="#b3c8d3">Blue</option>
+							<option value="#b3d3be">Green</option>
+							<option value="#D3B3B8" selected>Pink</option>
+							<option value="#b3b8d3">Purple</option>
+						  </select>
+				</div>
 				</div>
 			<div class="modal-footer justify-content-center">
 					<button mdbBtn color="pink" (click)="addObject();objectModal.hide()" [disabled]="Objectform.invalid">Submit</button>
@@ -114,13 +120,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr mdbTableCol *ngFor="let obj of objects" class="text-center">
+						<tr mdbTableCol *ngFor="let obj of ObjectArray" class="text-center">
 							<th scope="row" style=" font-size: 70%;">
 								<mdb-icon fas icon="edit" class="mr-2 grey-text" aria-hidden="true"></mdb-icon>
-								Object "{{obj}}""
+								Object "{{obj[0]}}""
 
 								<a mdbBtn floating="true" size="s"
-								(click)="removeObject(obj,objects)">
+								(click)="removeObject(obj,ObjectArray)">
 										<mdb-icon  fas icon="trash-alt" size="m" class="red-text pr-3"></mdb-icon>
 									</a>
 
@@ -144,8 +150,8 @@
 
 					<mdb-icon fas icon="male" size="2x" *ngFor="let t of table[2]" style="padding-left: 5px"></mdb-icon>
 				</div>
-				<div class="object" *ngFor="let obj of objects" cdkDrag cdkDragBoundary=".example-boundary" ngResizable>
-					{{obj}}
+				<div class="object" *ngFor="let obj of ObjectArray" cdkDrag cdkDragBoundary=".example-boundary" ngResizable [ngStyle]="{'background': obj[1]}">
+					{{obj[0]}}
 				</div>
 
 		</div>

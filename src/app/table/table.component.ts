@@ -43,6 +43,7 @@ export class TableComponent implements OnInit {
   dateMessage: string;
 
   TableArray: Array<Array<Array<string | Array<string | Array<Guest>>> | string | number>> = [];
+  ObjectArray: Array<string[]>=[]
 
 
   
@@ -83,6 +84,7 @@ export class TableComponent implements OnInit {
   height: number;
 
   color: string = "#D3B3B8";
+  objectColor: string = "#b3d3ce"
 
   test: string;
   Url = 'https://api.line.me/v2/bot/message/broadcast';
@@ -103,7 +105,8 @@ export class TableComponent implements OnInit {
     })
 
     this.Objectform = this.fb.group({
-      objectName: ['', [Validators.required]]
+      objectName: ['', [Validators.required]],
+      objectColor:['',[Validators.required]]
     })
 
     this.getGuests();
@@ -117,8 +120,8 @@ export class TableComponent implements OnInit {
   }
 
   addObject() {
-    this.objects.push(this.objectName);
-    console.log(this.objects)
+    this.ObjectArray.push([this.objectName,this.objectColor]);
+    console.log(this.ObjectArray)
     this.objectName = "";
     return this.objects;
   }
@@ -229,7 +232,6 @@ export class TableComponent implements OnInit {
           }
           await this.delay(3000);
         }
-        alert('Broadcast table is sucess');
         return('Broadcast table is sucess');
       }
     }else{

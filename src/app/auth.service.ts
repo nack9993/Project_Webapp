@@ -30,7 +30,7 @@ export class AuthService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Success!', value);
+        // console.log('Success!', value);
         // alert("Success, the information added into the system.")
         this.logout();
         this.router.navigate(['/login']);
@@ -51,13 +51,13 @@ export class AuthService {
       .then(value => {
         let uid = value.user.uid;
         console.log("Login with uid:" + uid);
-        this.router.navigate(['/guest']);
+        this.router.navigate(['/home']);
         return uid;
       })
       .catch(err => {
         this.router.navigate(['/login']);
-        console.log("Fail");
-        return "Fail";
+        console.log("Authentication failed");
+        return "Authentication failed";
       });
   }
 
@@ -70,10 +70,9 @@ export class AuthService {
   }
 
   resetPassword(email:string){
-    console.log('reset');
     return this.firebaseAuth.auth.sendPasswordResetEmail(email)
     .then( value => {
-      console.log(value);
+      // console.log(value);
     }).catch(function(error) {
       console.log(error);
     });

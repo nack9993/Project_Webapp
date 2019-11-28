@@ -90,7 +90,8 @@ sendAnswerToGuest(question,userId,answer){
             this.userId = "";
              return('Broadcast table is sucess');
            } else {
-             console.log('Something went wrong:' + JSON.stringify(err));
+            //  console.log('Something went wrong:' + JSON.stringify(err));
+            alert("Error : the message is not send to the user");
              this.question = "";
              this.answer = "";
              this.userId = "";
