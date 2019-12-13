@@ -232,7 +232,7 @@ export class TableComponent implements OnInit {
           }
           await this.delay(3000);
         }
-        return('Broadcast table is sucess');
+        return('Broadcast table is success');
       }
     }else{
       alert("Please making a table plan first")
@@ -254,10 +254,10 @@ export class TableComponent implements OnInit {
              console.log("Broadcast message is success");
            }).catch(err => {
              if (err.status == 200) {
-               console.log('Broadcast table is sucess');
+               alert('Broadcast Table to each guests is successfully');
                this.dateMessage = this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a");
                this.itemsCollection.add({NameOfTable: tables[1], id: table[1], date: this.datePipe.transform(new Date(),"MMM d, y, h:mm:ss a")});
-               return('Broadcast table is sucess');
+               return('Broadcast Table to each guests is successfully');
              } else {
                console.log('Something went wrong:' + JSON.stringify(err));
                return('Something went wrong:' + JSON.stringify(err));
@@ -287,7 +287,6 @@ export class TableComponent implements OnInit {
             }
         ]
         })).toPromise().then((result) => {
-          alert("Broadcast message is success");
         }).catch(err => {
           if (err.status == 200) {
             alert('Table Plan is successfully');

@@ -35,12 +35,5 @@ export class AdminComponent implements OnInit {
    return  this.afs.collection('photos').doc(name).delete();
   }
 
-  getDownloadUrl(file){
-    console.log(file);
-    this.url = this.storage.ref(file).getDownloadURL();
-    console.log(this.url);
-   return this.storage.ref(file).getDownloadURL();
-  }
- 
 
 }

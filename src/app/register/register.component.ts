@@ -35,7 +35,10 @@ export class RegisterComponent implements OnInit {
           case 'auth/invalid-email':
             alert("Your inputted data is invalid please input it again.");            
             break;
-          default:
+          case 'auth/network-request-failed':
+            alert("Error: Internet Connection")
+            break;
+          default:  
             alert("Success, the information added into the system.");
             this.resetpassword(this.email);
             break;
